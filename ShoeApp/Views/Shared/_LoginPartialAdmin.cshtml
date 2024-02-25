@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav  justify-content-end">
+        <li class="nav-item d-flex align-items-center">
+
+            @if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
+            {
+
+                <img class="avatar rounded-circle" alt="profile" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))" />
+            }
+            else
+            {
+
+            }
+            <a class="d-sm-inline d-none" style="color:aliceblue" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav  justify-content-end">
+        <li class="nav-item d-flex align-items-center">
+         
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </li>
+    </ul>
+
+
+
+
+}
+else
+{
+    <ul class="navbar-nav  justify-content-end">
+        <li class="nav-item d-flex align-items-center">
+   
+            <a class="btn btn-success" asp-area="Identity" asp-page="/Account/Register">Register</a>
+
+        </li>
+    </ul>
+    <ul class="navbar-nav  justify-content-end">
+        <li class="nav-item d-flex align-items-center">
+            <a class="btn btn-info" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    </ul>
+}

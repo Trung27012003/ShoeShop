@@ -1,0 +1,21 @@
+﻿@using ShoeApp.ViewModels;
+@model RoleClaimsViewModel
+
+<h2>Manage Role Claims</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="RoleId" />
+
+    @for (int i = 0; i < Model.Claims.Count; i++)
+    {
+        <div class="form-group">
+            <input type="hidden" asp-for="@Model.Claims[i].ClaimType" />
+            <div class="form-check">
+                <input class="form-check-input" asp-for="@Model.Claims[i].IsSelected" />
+                <label class="form-check-label" asp-for="@Model.Claims[i].IsSelected">@Model.Claims[i].ClaimType</label>
+            </div>
+        </div>
+    }
+
+    <button type="submit" class="btn btn-primary">Update Claims</button>
+</form>

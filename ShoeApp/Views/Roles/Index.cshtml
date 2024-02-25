@@ -1,0 +1,70 @@
+﻿@using ShoeApp.ViewModels;
+@model IEnumerable<RoleViewModels>
+
+<br@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+} />
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-primary">Roles List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" asp-controller="Roles" class="btn btn-primary">Create New Role</a>
+    </div>
+</div>
+<div class="p-4 border rounded">
+    @if (Model.Any())
+    {
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>Claims</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Name
+                    </td> 
+                    <td>
+                        @if (item.Claims.Count() == 0)
+                        {
+                            <span>No Claim</span>
+                        }
+                        else
+                        {
+                            @string.Join(" , ", item.Claims.ToList())
+                            ;
+
+                        }
+                    </td>
+
+                    <td>
+                        <div class="text-center">
+                            <form asp-action="Delete" asp-route-roleId="@item.Id">
+                                <a asp-action="Edit" asp-route-roleId="@item.Id" class="btn btn-info text-white" style="cursor:pointer">
+                                    Edit
+                                </a>
+                                <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xoá không?')" class="btn btn-danger">
+                                    DELETE
+                                </button>
+                                <a asp-action="ManageRoleClaims" asp-route-roleId="@item.Id" class="btn btn-outline-success" style="cursor:pointer">Claim</a>
+
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</div>
