@@ -52,21 +52,21 @@ namespace ShoeApp.Migrations
                         new
                         {
                             Id = "2FA6148D-B530-421F-878E-CE1D54BFC6AB",
-                            ConcurrencyStamp = "9a46bedc-a8bd-45df-8658-3d48e0d20755",
+                            ConcurrencyStamp = "8933ad84-3605-447c-b79c-cd21764b9690",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "12e74866-7348-407a-aab7-9a7d7e9b8f0c",
-                            ConcurrencyStamp = "12854f84-e570-406a-bc63-3f06e5d48766",
+                            Id = "3bd5519e-5a0b-4e20-af54-bd795c74f3c7",
+                            ConcurrencyStamp = "5755b571-5269-46dd-8a8b-02523e53c105",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "2FA6148D-B530-421F-878E-CE4D54BFC6AB",
-                            ConcurrencyStamp = "78974242-86ed-4b6a-975c-9ad744f141b8",
+                            ConcurrencyStamp = "25a78b49-1671-4291-b6bc-3bd7e0f3c873",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -125,12 +125,10 @@ namespace ShoeApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -174,12 +172,10 @@ namespace ShoeApp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -236,27 +232,27 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("76158011-7cbc-422f-b78a-445a4c136a8d"),
+                            Id = new Guid("04a60b57-f190-498c-a20a-587914ac85df"),
                             BrandName = "Brand 1"
                         },
                         new
                         {
-                            Id = new Guid("247a50d2-38e5-409b-95eb-fe0dce91e187"),
+                            Id = new Guid("da501de2-09b4-49a7-895b-b32d7a53e62a"),
                             BrandName = "Brand 2"
                         },
                         new
                         {
-                            Id = new Guid("9df3fe99-66e8-4f2e-96d3-5aaf3b8bb606"),
+                            Id = new Guid("33edf172-288a-403c-9eb5-2cf23c50f962"),
                             BrandName = "Brand 3"
                         },
                         new
                         {
-                            Id = new Guid("4becf17b-ab5b-439e-852a-452273a911d2"),
+                            Id = new Guid("aa99d901-be53-49f0-8cfc-7aa379dc6fb1"),
                             BrandName = "Brand 4"
                         },
                         new
                         {
-                            Id = new Guid("4b6cf35a-1a75-48e7-b99a-7f32feb88179"),
+                            Id = new Guid("a319d7c8-af4d-44f8-a07f-922b4474fe92"),
                             BrandName = "Brand 5"
                         });
                 });
@@ -321,27 +317,27 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eae54104-9b97-41d9-bd77-1e696b7bb04f"),
+                            Id = new Guid("dc349f04-7df1-4faa-abd5-88f115d83c1c"),
                             CategoryName = "Category 1"
                         },
                         new
                         {
-                            Id = new Guid("b73cf7b4-ce51-4867-a1eb-9d0db06e4860"),
+                            Id = new Guid("54f8d2a7-e8f5-49da-888e-fa68d7c04156"),
                             CategoryName = "Category 2"
                         },
                         new
                         {
-                            Id = new Guid("a44cfe38-e926-4cb5-96d4-4a39dada18ec"),
+                            Id = new Guid("f5fea705-b4ee-49cb-aff8-e20b5bbf1194"),
                             CategoryName = "Category 3"
                         },
                         new
                         {
-                            Id = new Guid("0f5162e2-1b92-47f2-8d39-a5a8212c0d10"),
+                            Id = new Guid("2dcef8da-3c3c-4059-85f5-f95df0233d63"),
                             CategoryName = "Category 4"
                         },
                         new
                         {
-                            Id = new Guid("3eb872fc-33a2-4690-bd9d-a73ca70a625e"),
+                            Id = new Guid("9368a10f-97f8-48f4-9f55-afec814dfb69"),
                             CategoryName = "Category 5"
                         });
                 });
@@ -365,97 +361,97 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            ColorId = new Guid("5e8591ab-583b-4b18-a7d3-a4e69c20f991"),
+                            ColorId = new Guid("cff4029c-c685-49e7-a03a-d42af8fd25a5"),
                             ColorCode = "#000000",
                             ColorName = "Đen"
                         },
                         new
                         {
-                            ColorId = new Guid("b4122bc6-b698-421c-825f-86e5d1e8a499"),
+                            ColorId = new Guid("4ef0ab43-6278-432a-adda-cf26303747d6"),
                             ColorCode = "#FFFFFF",
                             ColorName = "Trắng"
                         },
                         new
                         {
-                            ColorId = new Guid("5a7aa15d-c6b1-4555-b9bc-972166d33cb9"),
+                            ColorId = new Guid("a51ccab9-767e-4b3e-b7d5-f8ac9e4516dc"),
                             ColorCode = "#FF0000",
                             ColorName = "Đỏ"
                         },
                         new
                         {
-                            ColorId = new Guid("44be66ce-5941-46d1-9b41-6881031dc13f"),
+                            ColorId = new Guid("2a649526-a13a-40c2-89e7-efc071e60ffb"),
                             ColorCode = "#00FF00",
                             ColorName = "Xanh lá cây"
                         },
                         new
                         {
-                            ColorId = new Guid("af946fe5-1dcc-4ffe-bff9-15ef4c7ab688"),
+                            ColorId = new Guid("b4af8b14-afa6-424c-9b22-2cbbb076f17f"),
                             ColorCode = "#0000FF",
                             ColorName = "Xanh dương"
                         },
                         new
                         {
-                            ColorId = new Guid("b2be2059-c660-4c57-879c-f5e735b43363"),
+                            ColorId = new Guid("77fab2f2-4e19-43ed-bb1a-7c0108cf5c38"),
                             ColorCode = "#FFFF00",
                             ColorName = "Vàng"
                         },
                         new
                         {
-                            ColorId = new Guid("5895fd34-e355-431a-bf76-0c4bfbd1fb00"),
+                            ColorId = new Guid("7cf895d7-41b4-4641-b933-76daea321721"),
                             ColorCode = "#FFA500",
                             ColorName = "Cam"
                         },
                         new
                         {
-                            ColorId = new Guid("5eeda66b-1800-47ba-ba16-8b971d016878"),
+                            ColorId = new Guid("9a5b4a30-83d5-47d1-894a-08470a5aca3e"),
                             ColorCode = "#800080",
                             ColorName = "Tím"
                         },
                         new
                         {
-                            ColorId = new Guid("6478d564-c435-491b-9d29-8831759079e3"),
+                            ColorId = new Guid("75f20c50-57f2-4af4-9d28-56ba4c0efae6"),
                             ColorCode = "#FFC0CB",
                             ColorName = "Hồng"
                         },
                         new
                         {
-                            ColorId = new Guid("96ded6f5-7c32-47aa-9ef3-9c850496e358"),
+                            ColorId = new Guid("42705878-835e-4255-8a3a-049f050f259c"),
                             ColorCode = "#808080",
                             ColorName = "Xám"
                         },
                         new
                         {
-                            ColorId = new Guid("f2bbe183-d412-44e1-9c45-6435097107ff"),
+                            ColorId = new Guid("069544b3-0588-416d-9629-b312f5e4080a"),
                             ColorCode = "#A52A2A",
                             ColorName = "Nâu"
                         },
                         new
                         {
-                            ColorId = new Guid("ce617b4a-8319-473b-8862-e3133dda30af"),
+                            ColorId = new Guid("7867fdca-e319-47d5-98ed-ae1a4836134f"),
                             ColorCode = "#000080",
                             ColorName = "Xanh lam"
                         },
                         new
                         {
-                            ColorId = new Guid("04f85df1-dd7b-4a54-946b-91dc969b9c1b"),
+                            ColorId = new Guid("6e32d452-3afe-419d-9c00-cc4b57db7b04"),
                             ColorCode = "#00BFFF",
                             ColorName = "Xanh da trời"
                         },
                         new
                         {
-                            ColorId = new Guid("f2815eb9-8198-452a-bf1c-5b91bb81f0eb"),
+                            ColorId = new Guid("a8243496-58b0-4c85-970a-e835e9d40ff5"),
                             ColorCode = "#FFDAB9",
                             ColorName = "Hồng phấn"
                         },
                         new
                         {
-                            ColorId = new Guid("e7557471-66c5-4e07-9990-3f35926e5ff8"),
+                            ColorId = new Guid("b34fdfd5-5bf2-4e96-b0a6-ea2ea40a17ad"),
                             ColorCode = "#C0C0C0",
                             ColorName = "Xám tro"
                         },
                         new
                         {
-                            ColorId = new Guid("126e1410-cf44-4b01-bd44-be2535f7caa7"),
+                            ColorId = new Guid("cd4e8385-794a-46e1-9ced-2331cf19c7fa"),
                             ColorCode = "#C0C0C0",
                             ColorName = "Bạc"
                         });
@@ -508,6 +504,9 @@ namespace ShoeApp.Migrations
 
                     b.Property<decimal?>("TotalAmoutAfterApplyingVoucher")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("Update_Date")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -762,12 +761,12 @@ namespace ShoeApp.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProductDetailId")
+                    b.Property<Guid?>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductDetailId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductImage");
                 });
@@ -804,14 +803,14 @@ namespace ShoeApp.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ef72f925-6e9e-409a-8f60-9e3332799585"),
+                            Id = new Guid("79a73ffc-889c-4e2c-bace-e2420cec43d1"),
                             Name = "Vàng",
                             PoinsMax = 3000000,
                             PointsMin = 1000001
                         },
                         new
                         {
-                            Id = new Guid("a4d2207e-3003-43f0-b1d8-d951039c4edf"),
+                            Id = new Guid("ab9f7bd6-ccc3-4ed9-b3a0-ee30d225af7a"),
                             Name = "Kim Cương",
                             PoinsMax = 10000000,
                             PointsMin = 3000001
@@ -865,27 +864,27 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5c99d4e4-c0f4-4a7c-a1a6-5ce74e0ab808"),
+                            Id = new Guid("352d35d1-f72e-46ad-bda4-28621dfad9e4"),
                             SizeName = "Size 1"
                         },
                         new
                         {
-                            Id = new Guid("83227dcb-af8f-499e-87a2-5d65bbfe59a7"),
+                            Id = new Guid("3a2e2229-379e-41e0-b46e-7c9f0739ca8e"),
                             SizeName = "Size 2"
                         },
                         new
                         {
-                            Id = new Guid("f558bf14-80e3-475e-8b17-a0cc38e47ddb"),
+                            Id = new Guid("30c5b71a-bf4e-4413-9b1f-9ee75c152213"),
                             SizeName = "Size 3"
                         },
                         new
                         {
-                            Id = new Guid("2fb76ef6-e3fc-40d9-85bf-2df26849a8d6"),
+                            Id = new Guid("99407c55-9b46-4c88-aede-39308debe014"),
                             SizeName = "Size 4"
                         },
                         new
                         {
-                            Id = new Guid("c260e042-1927-45c0-92eb-eeffcd8c415f"),
+                            Id = new Guid("05fb222c-8852-4079-ae64-5bfa88f4be59"),
                             SizeName = "Size 5"
                         });
                 });
@@ -979,14 +978,14 @@ namespace ShoeApp.Migrations
                         {
                             Id = "2FA6148D-B530-421F-878E-CE4D54BFC6AB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "46fbb6df-cac5-4aaf-b499-2618a9c965a6",
+                            ConcurrencyStamp = "0ff364a3-c12e-4c8a-988b-33289907dcde",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedUserName = "GUEST",
                             PhoneNumberConfirmed = false,
                             Points = 0,
                             RankId = new Guid("2fa0118d-b530-421f-878e-ce4d54bfc6ab"),
-                            SecurityStamp = "02dd24f9-ca80-41e2-86fb-1310aa84e9ae",
+                            SecurityStamp = "c540e8d1-3718-48ff-8b83-f310bf95465d",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         });
@@ -1230,9 +1229,9 @@ namespace ShoeApp.Migrations
 
             modelBuilder.Entity("ShoeApp.Models.ProductImage", b =>
                 {
-                    b.HasOne("ShoeApp.Models.ProductDetail", "Product")
+                    b.HasOne("ShoeApp.Models.Product", "Product")
                         .WithMany("ProductImages")
-                        .HasForeignKey("ProductDetailId");
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
@@ -1311,6 +1310,8 @@ namespace ShoeApp.Migrations
             modelBuilder.Entity("ShoeApp.Models.Product", b =>
                 {
                     b.Navigation("ProductDetails");
+
+                    b.Navigation("ProductImages");
                 });
 
             modelBuilder.Entity("ShoeApp.Models.ProductDetail", b =>
@@ -1318,8 +1319,6 @@ namespace ShoeApp.Migrations
                     b.Navigation("CartItem");
 
                     b.Navigation("OrderItems");
-
-                    b.Navigation("ProductImages");
                 });
 
             modelBuilder.Entity("ShoeApp.Models.Rank", b =>

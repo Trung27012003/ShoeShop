@@ -7,9 +7,9 @@ namespace ShoeApp.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid? ProductId { get; set; }
-        public Guid? SizeId { get; set; }
-        public Guid? ColorId { get; set; }
+        public Guid ProductId { get; set; }
+        public Guid SizeId { get; set; }
+        public Guid ColorId { get; set; }
         public string? SKU { get; set; }
         public int? Quantity { get; set; }
         public decimal? Price { get; set; }
@@ -29,6 +29,6 @@ namespace ShoeApp.Models
         public virtual List<CartItem>? CartItem { get; set; }
         public virtual List<OrderItem>? OrderItems { get; set; }
 
-        public virtual List<ProductImage>? ProductImages { get; set; }
+        
     }
 }

@@ -1,0 +1,104 @@
+﻿@model ShoeApp.Models.ProductDetail
+
+@{
+    ViewData["Page"] = "Sản phẩm";
+    ViewData["Title"] = "Cập nhật biến thể";
+}
+
+<form asp-action="EditPD">
+
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="multisteps-form__content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="mt-4">SKU</label>
+                    <input class="multisteps-form__input form-control" asp-for="SKU" type="text" value="@Model.SKU" />
+                    <input class="multisteps-form__input form-control" asp-for="ProductId" type="text" value="@Model.ProductId" />
+                    <input class="multisteps-form__input form-control" asp-for="Id" type="text" value="@Model.Id" />
+
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-16 col-sm-6">
+                    <label>Kích cỡ</label>
+                    <select asp-for="SizeId" id="choices-category" class="form-control" asp-items="@(new SelectList(ViewBag.ListSizeitems, "Value", "Text"))">
+                    </select>
+
+                </div>
+                <div class="col-16 col-sm-6">
+                    <label>Màu sắc</label>
+                    <select asp-for="ColorId" id="choices-sizes" class="form-control" asp-items="@(new SelectList(ViewBag.ListColoritems, "Value", "Text"))">
+                    </select>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="mt-4">Số lượng</label>
+                    <input class="multisteps-form__input form-control" asp-for="Quantity" type="number" value="@Model.Quantity" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-16 col-sm-6">
+                    <label class="mt-4">Giá nhập</label>
+                    <input class="multisteps-form__input form-control" asp-for="Price" type="number" value="@Model.Price"/>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="col-16 col-sm-6">
+                    <label class="mt-4">Giá bán</label>
+                    <input class="multisteps-form__input form-control" asp-for="PriceSale" type="number" value="@Model.PriceSale" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="mt-4">Mô tả</label>
+                    <input class="multisteps-form__input form-control" asp-for="Description" value="@Model.Description"/>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+    </div>
+</form>
+
+<script src="~/fileAdmin/js/plugins/choices.min.js"></script>
+<script src="~/fileAdmin/js/plugins/dropzone.min.js"></script>
+<script src="~/fileAdmin/js/plugins/quill.min.js"></script>
+<script src="~/fileAdmin/assets/js/plugins/multistep-form.js"></script>
+<script>
+
+    if (document.getElementById('choices-category')) {
+        var element = document.getElementById('choices-category');
+        const example = new Choices(element, {
+            searchEnabled: false
+        });
+    };
+
+    if (document.getElementById('choices-sizes')) {
+        var element = document.getElementById('choices-sizes');
+        const example = new Choices(element, {
+            searchEnabled: false
+        });
+    };
+
+    if (document.getElementById('choices-currency')) {
+        var element = document.getElementById('choices-currency');
+        const example = new Choices(element, {
+            searchEnabled: false
+        });
+    };
+
+</script>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

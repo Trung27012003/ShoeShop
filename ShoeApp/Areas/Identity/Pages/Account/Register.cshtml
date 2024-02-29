@@ -2,75 +2,96 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
+<link id="pagestyle" href="~/fileAdmin/css/argon-dashboard.css?v=2.0.0" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" maxlength="100" />
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+<main class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg'); background-position: top;">
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 text-center mx-auto">
+                    <h1 class="text-white mb-2 mt-5">Welcome!</h1>
+                    <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" maxlength="100" />
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.Password"></label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
+        </div>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to register.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
+    <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+            <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+                <div class="card z-index-0">
+                    <div class="card-header text-center pt-4">
+                        <h5>Đăng kí bằng</h5>
                     </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins!)
+                    <div class="row px-xl-5 px-sm-4 px-3">
+                        <div class="card-header bg-transparent">
+                            <h5 class="text-dark text-center mt-2 mb-3">Sign in</h5>
+                            <div class="btn-wrapper text-center">
+                                @if ((Model.ExternalLogins?.Count ?? 0) != 0)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+
+                                        @foreach (var provider in Model.ExternalLogins!)
+                                        {
+
+                                            string link = "../../../fileAdmin/img/logos/" + provider.DisplayName + ".svg";
+                                            <button class="btn btn-neutral btn-icon btn-sm mb-0" type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                                <img class="w-30" src="@link">
+                                                @provider.DisplayName
+                                            </button>
+                                        }
+                                    </form>
                                 }
+                            </div>
+                        <div class="mt-2 position-relative text-center">
+                            <p class="text-sm font-weight-bold mb-2 text-secondary text-border d-inline z-index-2 bg-white px-3">
+                                or
                             </p>
                         </div>
-                    </form>
-                }
-            }
-        </section>
+                    </div>
+                    <div class="card-body">
+                        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="mb-3">
+                                <input asp-for="Input.FirstName" type="text" class="form-control" placeholder="Họ" aria-label="Ho" maxlength="100" />
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            </div>
+                             <div class="mb-3">
+                                <input asp-for="Input.LastName" type="text" class="form-control" placeholder="Tên" aria-label="Ho" maxlength="100" />
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <input asp-for="Input.Email" type="email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" aria-label="Email" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <input asp-for="Input.Password" autocomplete="new-password" aria-required="true" type="password" class="form-control" placeholder="Password" aria-label="Password" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <input asp-for="Input.ConfirmPassword" autocomplete="new-password" aria-required="true" type="password" class="form-control" placeholder="Password" aria-label="Password" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-check form-check-info text-start">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Tôi đồng ý với<a href="javascript:;" class="text-dark font-weight-bolder">điều khoản và dịch vụ của Trung snacker</a>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Đăng kí</button>
+                            </div>
+                            <p class="text-sm mt-3 mb-0">Bạn đã có tài khoản? <button asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"  class="text-dark font-weight-bolder">Đăng nhập</button></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</main>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

@@ -20,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using ShoeApp.Models;
 using System.Net.Mail;
 using System.Net;
+using ShoeApp.IServices;
 
 namespace ShoeApp.Areas.Identity.Pages.Account
 {
@@ -29,18 +30,22 @@ namespace ShoeApp.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly ICartService _cartService;
         private readonly ILogger<ExternalLoginModel> _logger;
 
         public ExternalLoginModel(
             SignInManager<User> signInManager,
             UserManager<User> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ICartService cartService
+            )
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _cartService = cartService;
         }
 
         /// <summary>
@@ -173,6 +178,13 @@ namespace ShoeApp.Areas.Identity.Pages.Account
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
                         var userId = await _userManager.GetUserIdAsync(user);
+
+                        // tạo cart
+                        var createCartResult = await _cartService.Add(new Cart() { Id = Guid.NewGuid(), UserId = userId });
+
+                        // add role
+                        await _userManager.AddToRoleAsync(user, "User");
+
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                         var callbackUrl = Url.Page(

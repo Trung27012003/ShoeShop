@@ -1,0 +1,189 @@
+﻿@model ShoeApp.Models.Product
+
+@{
+    ViewData["Page"] = "Sản phẩm";
+    ViewData["Title"] = "Cập nhật";
+}
+<!-- include libraries(jQuery, bootstrap) -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> @* Sử dụng*@
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> @* Sử dụng*@
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> @* Sử dụng*@
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> @* Sử dụng*@
+<form asp-action="Edit">
+
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="multisteps-form__content">
+            <div class="row mt-3">
+                <div class="col-12 col-sm-12">
+                    <label>Tên sản phẩm </label>
+                    <input asp-for="ProductName" value="@Model.ProductName" class="multisteps-form__input form-control" />
+                    <input asp-for="Id" value="@Model.Id" hidden />
+                    <input asp-for="ProductCode" value="1" hidden />
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-16 col-sm-6">
+                    <label>Category</label>
+                    <select asp-for="CategoryId" id="choices-category" class="form-control" asp-items="@(new SelectList(ViewBag.ListCategoryitems, "Value", "Text"))">
+                    </select>
+
+                </div>
+                <div class="col-16 col-sm-6">
+                    <label>Brand</label>
+                    <select  asp-for="BrandId" id="choices-sizes" class="form-control" asp-items="@(new SelectList(ViewBag.ListBranditems, "Value", "Text"))">
+                    </select>
+
+                </div>
+            </div>
+            @if (Model.ProductImages!=null)
+            {
+                <div class="row mt-4">
+                    <label>Ảnh sản phẩm</label>
+
+                    @foreach (var item in Model.ProductImages)
+                    {
+                        <div class="col-lg-3">
+                            <div class="card h-70">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="d-flex">
+                                                <a @*asp-action="RemoveImage" asp-route-productImageId="@item.Id"*@ onclick="RemoveImage('@item.Id')" class="btn btn-outline-dark btn-sm mb-0" name="button">Remove</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <img class="w-100 border-radius-lg shadow-lg mt-3"
+                                                 src="@item.ImageUrl"
+                                                 alt="product_image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="multisteps-form__content">
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <label>Thêm ảnh</label>
+                                <div action="/Admin/Product/UploadImage" class="form-control dropzone" id="productImg"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="mt-4">Description</label>
+                    <textarea asp-for="Long_Description" id="summernote">@Model.Long_Description</textarea>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <span asp-validation-for="Long_Description" class="text-danger"></span>
+    <br />
+    <div class="form-group">
+        <input type="submit" value="Cập nhật" class="btn btn-primary" />
+    </div>
+</form>
+<script src="~fileAdmin\summernote\summernote-bs4.min.js"></script>       @* Sử dụng*@
+<link rel="stylesheet" href="~fileAdmin\summernote\summernote-bs4.min.css" />      @* Sử dụng + tải file ~wwwroot\lib\summernote\ *@
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    /*sử dụng*/
+    $('#summernote').summernote({
+        placeholder: 'Nhập nội dung',
+        tabsize: 5,
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    });
+</script>
+<script src="~/fileAdmin/js/plugins/choices.min.js"></script>
+<script src="~/fileAdmin/js/plugins/dropzone.min.js"></script>
+<script src="~/fileAdmin/js/plugins/quill.min.js"></script>
+<script src="~/fileAdmin/assets/js/plugins/multistep-form.js"></script>
+<script>
+    function RemoveImage(productImageId) {
+        // Gửi request Ajax
+        $.ajax({
+            url: "/Admin/Product/RemoveImage", // Thay bằng URL của action
+            type: "POST", // Hoặc "GET" tùy theo action của bạn
+            data: { productImageId: productImageId }, // Truyền item.id vào action
+            success: function (response) {
+                // Nếu action trả về true, reload lại trang
+                if (response === true) {
+                    alert(response);
+                    location.reload();
+                } else {
+                    alert(response);
+                }
+            },
+            error: function () {
+                // Xử lý khi có lỗi xảy ra (nếu cần)
+                alert(response);
+            }
+        });
+    }
+</script>
+<script>
+
+    if (document.getElementById('edit-deschiption')) {
+        var quill = new Quill('#edit-deschiption', {
+            theme: 'snow' // Specify theme in configuration
+        });
+    };
+
+    if (document.getElementById('choices-category')) {
+        var element = document.getElementById('choices-category');
+        const example = new Choices(element, {
+            searchEnabled: false
+        });
+    };
+
+    if (document.getElementById('choices-sizes')) {
+        var element = document.getElementById('choices-sizes');
+        const example = new Choices(element, {
+            searchEnabled: false
+        });
+    };
+
+    if (document.getElementById('choices-currency')) {
+        var element = document.getElementById('choices-currency');
+        const example = new Choices(element, {
+            searchEnabled: false
+        });
+    };
+    }
+
+</script>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

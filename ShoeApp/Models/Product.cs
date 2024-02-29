@@ -24,6 +24,6 @@ namespace ShoeApp.Models
         public Brand? Brand { get; set; }
 
         public virtual List<ProductDetail>? ProductDetails { get; set; }
-
+        public virtual List<ProductImage>? ProductImages { get; set; }
     }
 }

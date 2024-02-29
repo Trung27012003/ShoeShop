@@ -19,7 +19,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ShoeApp.IServices;
 using ShoeApp.Models;
+using ShoeApp.Services;
 
 namespace ShoeApp.Areas.Identity.Pages.Account
 {
@@ -30,17 +32,21 @@ namespace ShoeApp.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ICartService _cartService;
 
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ICartService cartService
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _cartService = cartService;
         }
 
         /// <summary>
@@ -127,35 +133,44 @@ namespace ShoeApp.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     Points = 0,
                     RankId = Guid.Parse("2FA0118D-B530-421F-878E-CE4D54BFC6AB"),
-                    
+
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
-
+                // create user
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");
-                    // thao tác với user
+                    _logger.LogInformation("Tạo mới user với mật khẩu.");
+
 
                     var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // tạo cart
+                    var createCartResult = await _cartService.Add(new Cart() { Id = Guid.NewGuid() ,UserId = userId }) ;
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    // set role
+                    await _userManager.AddToRoleAsync(user, "User");
+                    if (createCartResult.IsSuccess)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                            $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
                     }
                 }
                 foreach (var error in result.Errors)

@@ -7,9 +7,9 @@ namespace ShoeApp.Models
     {
         [Key]
         public Guid Id { get; set; }
-        public Guid? ProductDetailId { get; set; }
+        public Guid? ProductId { get; set; }
         public string? ImageUrl { get; set; }
-        [ForeignKey("ProductDetailId")]
-        public ProductDetail? Product { get; set; }
+        [ForeignKey("ProductId")]
+        public Product? Product { get; set; }
     }
 }

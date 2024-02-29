@@ -18,15 +18,16 @@
             }
             <a class="d-sm-inline d-none" style="color:aliceblue" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
         </li>
-    </ul>
-    <ul class="navbar-nav  justify-content-end">
         <li class="nav-item d-flex align-items-center">
-         
+
             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="btn btn-danger">Logout</button>
             </form>
         </li>
+
     </ul>
+
+   
 
 
 

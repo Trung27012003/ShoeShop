@@ -10,14 +10,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ShoeApp.Data;
 using ShoeApp.Models;
-using ShoeApp.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using ShoeApp.Helper;
+using ShoeApp.Services;
+using ShoeApp.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Add services to the container.
 
@@ -25,27 +26,59 @@ builder.Services.AddDbContext<MyDbContext>(options =>
              options.UseSqlServer(
                  builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+// add identity
 builder.Services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<MyDbContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
+
+// add dependency injection
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IAdressService,AdressService>();
+builder.Services.AddScoped<IBrandService,BrandService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<ICartItemService,CartItemService>();
+builder.Services.AddScoped<IColorService,ColorService>();
+builder.Services.AddScoped<IOrderService,OrderService>();
+builder.Services.AddScoped<IOrderStatusService,OrderStatusService>();
+builder.Services.AddScoped<IOrderItemService,OrderItemService>();
+builder.Services.AddScoped<IPostService,PostService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
+builder.Services.AddScoped<IProductImageService, ProductImageService>();
+builder.Services.AddScoped<IRankService, RankService>();
+builder.Services.AddScoped<IRateService, RateService>();
+builder.Services.AddScoped<ISizeService, SizeService>();
+builder.Services.AddScoped<IUserVoucherService, UserVoucherService>();
+builder.Services.AddScoped<IVoucherService, VoucherService>();
+
+
+
+
+// add authorization
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("CreateV1", policy => policy.RequireClaim("Create","True"));
+    options.AddPolicy("CreateV1", policy => policy.RequireClaim("Create", "True"));
     options.AddPolicy("EditV1", policy => policy.RequireClaim("Edit", "True"));
     options.AddPolicy("DeleteV1", policy => policy.RequireClaim("Delete", "True"));
 });
 
+// add razor page
 builder.Services.AddRazorPages();
-builder.Services.AddControllersWithViews();
-// Đăng ký dịch vụ CheckLogin
+// add session
+builder.Services.AddSession();
 
-builder.Services.AddAuthentication(options => {
+builder.Services.AddControllersWithViews();
+
+//add authentication
+builder.Services.AddAuthentication(options =>
+{
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-   .AddCookie()
+
+  .AddCookie()
   .AddGoogle(options =>
   {     // Đọc thông tin Authentication:Google
       IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
@@ -54,7 +87,17 @@ builder.Services.AddAuthentication(options => {
       options.ClientSecret = googleAuthNSection["ClientSecret"];
       // Cấu hình Url callback lại từ Google (không thiết lập thì mặc định là /signin-google)
       options.CallbackPath = "/signin-google";
-  });
+  })
+//.AddFacebook(options =>
+//  {     // Đọc thông tin Authentication:facebook
+//      IConfigurationSection facebookAuthNSection = builder.Configuration.GetSection("Authentication:Facebook");
+//      // Thiết lập ClientID và ClientSecret để truy cập API google
+//      options.ClientId = facebookAuthNSection["ClientId"];
+//      options.ClientSecret = facebookAuthNSection["ClientSecret"];
+//      // Cấu hình Url callback lại từ Google (không thiết lập thì mặc định là /signin-google)
+//  })
+
+;
 
 
 var app = builder.Build();
@@ -73,7 +116,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+// use session
+app.UseSession();
 
+//use authen + author
 app.UseAuthentication();
 app.UseAuthorization();
 

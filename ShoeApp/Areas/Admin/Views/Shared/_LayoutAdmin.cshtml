@@ -5,9 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="~/fileAdmin/img/apple-icon.png">
-    <link rel="icon" type="image/png" href="~/fileAdmin/img/favicon.png">
+    <link rel="icon" type="image/png" href="~/fileAdmin/img/logo.png">
     <title>
-        Smart Dashboard
+        Dashboard
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -21,6 +21,24 @@
     <link href="~/fileAdmin/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="~/fileAdmin/css/argon-dashboard.css?v=2.0.0" rel="stylesheet" />
+
+    <script src="~/fileAdmin/js/plugins/datatables.js"></script>
+    <script src="~/fileAdmin/js/core/popper.min.js"></script>
+    <script src="~/fileAdmin/js/core/bootstrap.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/dropzone.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/sweetalert.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/quill.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/chartjs.min.js"></script>
+    <!-- Kanban scripts -->
+    <script src="~/fileAdmin/js/plugins/dragula/dragula.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/jkanban/jkanban.js"></script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/fileAdmin/js/argon-dashboard.min.js?v=2.0.1"></script>
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -33,7 +51,7 @@
             <a class="navbar-brand m-0"
                href=" https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/default.html "
                target="_blank">
-                <img src="~/fileAdmin/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+                <img src="~/fileAdmin/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold">Smart</span>
             </a>
         </div>
@@ -41,40 +59,109 @@
         <div class="collapse navbar-collapse  w-auto h-auto h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link "
-                       aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+                    <a href="#" class="nav-link ">
                         <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Dashboards</span>
                     </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="Admin" asp-controller="User" asp-action="index">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="sidenav-normal"> Quản lí người dùng </span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="Admin" asp-controller="Role" asp-action="index">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="sidenav-normal"> Quản lí chức vụ </span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link "
+                       aria-controls="dashboardsExamples" role="button" aria-expanded="false">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Quản lí sản phẩm</span>
+                    </a>
                     <div class="collapse " id="dashboardsExamples">
                         <ul class="nav ms-4">
                             <li class="nav-item ">
-                                <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#vrExamples">
-                                    <span class="sidenav-mini-icon"> V </span>
-                                    <span class="sidenav-normal"> Virtual Reality <b class="caret"></b></span>
+                                <a class="nav-link " asp-area="Admin" asp-controller="Product" asp-action="index">
+                                    <span class="sidenav-mini-icon"> P </span>
+                                    <span class="sidenav-normal"> Sản phẩm </span>
                                 </a>
-                                <div class="collapse " id="vrExamples">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a class="nav-link " href="#">
-                                                <span class="sidenav-mini-icon text-xs"> V </span>
-                                                <span class="sidenav-normal"> VR Default </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link " href="#">
-                                    <span class="sidenav-mini-icon"> C </span>
-                                    <span class="sidenav-normal"> CRM </span>
+                                    <span class="sidenav-mini-icon"> PD </span>
+                                    <span class="sidenav-normal"> Sản phẩm biến thể</span>
                                 </a>
                             </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="#">
+                                    <span class="sidenav-mini-icon"> BR </span>
+                                    <span class="sidenav-normal"> Hãng sản xuất</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="#">
+                                    <span class="sidenav-mini-icon"> CT </span>
+                                    <span class="sidenav-normal"> Loại sản phẩm</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="#">
+                                    <span class="sidenav-mini-icon"> CL </span>
+                                    <span class="sidenav-normal"> Màu sắc</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link " href="#">
+                                    <span class="sidenav-mini-icon"> SZ </span>
+                                    <span class="sidenav-normal"> Kích cỡ</span>
+                                </a>
+                            </li>
+
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link " href="#">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="sidenav-normal"> Quản lí đơn hàng </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="sidenav-normal"> Quản lí bài đăng </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#">
+                        <div class="icon https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/default.html-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="sidenav-normal"> Quản lí mã giảm giá </span>
+                    </a>
+                </li>
+
+
             </ul>
         </div>
     </aside>
@@ -90,13 +177,17 @@
                                 <i class="ni ni-box-2"></i>
                             </a>
                         </li>
-                        <li class="breadcrumb-item text-sm text-white">
-                            <a class="opacity-5 text-white"
-                               href="javascript:;">Pages</a>
-                        </li>
-                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Reports</li>
+
+                        @if (ViewData["Page"] != null)
+                        {
+                            <li class="breadcrumb-item text-sm text-white">
+                                <a class="opacity-5 text-white"
+                                   href="javascript:;">@ViewData["Page"]</a>
+                            </li>
+
+                        }
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">@ViewData["Title"]</li>
                     </ol>
-                    <h6 class="font-weight-bolder mb-0 text-white">Reports</h6>
                 </nav>
                 <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
                     <a href="javascript:;" class="nav-link p-0">
@@ -125,10 +216,10 @@
         </nav>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
-            <div class="row my-4">
+            <div class="row my-4 card">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <div class="card">
+                        <div class="">
                             @RenderBody()
                         </div>
                     </div>
@@ -247,15 +338,8 @@
             </div>
         </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="~/fileAdmin/js/core/popper.min.js"></script>
-    <script src="~/fileAdmin/js/core/bootstrap.min.js"></script>
-    <script src="~/fileAdmin/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="~/fileAdmin/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="~/fileAdmin/js/plugins/chartjs.min.js"></script>
-    <!-- Kanban scripts -->
-    <script src="~/fileAdmin/js/plugins/dragula/dragula.min.js"></script>
-    <script src="~/fileAdmin/js/plugins/jkanban/jkanban.js"></script>
+
+
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -265,10 +349,8 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="~/fileAdmin/js/argon-dashboard.min.js?v=2.0.0"></script>
+    <script src="~/fileAdmin/js/plugins/multistep-form.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

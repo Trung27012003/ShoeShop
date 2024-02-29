@@ -1,0 +1,259 @@
+
+while(true) do 
+if gg.isVisible(true) then 
+menuk = 1 
+gg.setVisible(false) 
+end 
+
+START = 1 
+
+function START() 
+menu = gg.choice({  '1. Hack skip',
+                    '2. Hack Level',
+                    '3. Support đua Heroic',
+                    '4. Move Habit',
+                    '❎ Exit ❎'},Last,
+                    '--------------------------------------Trung2k3dz-------------------------------------')
+    if menu == 1 then Start1() end
+    if menu == 2 then Start2() end
+    if menu == 3 then Start3() end
+    if menu == 4 then Start4() end
+    if menu == 5 then ends() end
+    if menu == nil then noselect() end 
+    menuk =-1 
+end 
+
+
+
+
+   
+    
+function Start1() 
+skip =  gg.multiChoice({
+
+'1. 30p',
+'2. 12h',
+'❎ Close ❎',
+}
+,nil,
+'Skip hiện tại đang có: ')
+
+if skip == nil then else
+if skip[1] == true then skip30p() end
+if skip[2] == true then skip12h() end
+if skip[3] ==true then START() end 
+end end
+
+function skip12h()
+gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
+    gg. searchNumber("1;4;43200;1;4;43200::200", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)    
+    gg. getResults(1000, nil, nil, nil, 43200, 43200)                                           
+    gg.editAll("1000000", gg.TYPE_DWORD)
+    gg.refineNumber("999998", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)                                                        
+    gg.clearResults()
+    gg.toast('  Hack Skip  ')
+
+end
+function skip30p()
+gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
+    gg. searchNumber("1;8;1800;1;8;1800::200", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)    
+    gg. getResults(1000, nil, nil, nil, 1800, 1800)                                           
+    gg.editAll("1000000", gg.TYPE_DWORD)
+    gg.refineNumber("999998", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)                                                        
+    gg.clearResults()
+    gg.toast('  Hack Skip  ')
+
+end
+function Start2()
+    menu1 = gg.choice({'1. lv 10','2. lv 20','3. lv 25','4. lv 30','5. lv 35','6. lv 40','7. lv 50','8. lv 55','9. lv 70','❎ EXIT ❎'},Last,'Hack lv ')
+    if menu1 == 1 then code1() end
+    if menu1 == 2 then code2() end
+    if menu1 == 3 then code3() end
+    if menu1 == 4 then code4() end
+    if menu1 == 5 then code5() end
+    if menu1 == 6 then code6() end
+    if menu1 == 7 then code7() end
+    if menu1 == 8 then code8() end
+    if menu1 == 9 then code9() end
+    if menu1 == 10 then START() end
+    if menu1 == nil then noselect() end 
+end
+
+function code1()
+    gg. searchNumber("1000~3000;36~38;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 36, 38)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+    
+    function code2()
+    gg. searchNumber("1000~3000;76~77;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 76, 77)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+    
+    function code3()
+    gg. searchNumber("1000~3000;96~97;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 96, 97)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+    
+    function code4()
+    gg. searchNumber("1000~3000;116;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 116, 116)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+    
+    function code5()
+    gg. searchNumber("1000~3000;136~137;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 136, 137)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+    
+    function code6()
+    gg. searchNumber("1000~3000;156;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 156, 156)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+
+  function code7()
+    gg. searchNumber("1000~3000;196;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 196, 196)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+
+    function code8()
+    gg. searchNumber("1000~3000;216;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 216, 216)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+
+    function code9()
+    gg. searchNumber("1000~3000;276;0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 276, 276)
+    gg.editAll("7996", gg.TYPE_DWORD)
+    gg.refineNumber("0~400;0~400;0~400;0~400::30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(1000, nil, nil, nil, 0, 289)
+    gg.editAll("310;301;307;255", gg.TYPE_DWORD)
+    gg.clearResults()
+    end
+    
+function Start3() 
+menu2 =  gg.multiChoice({
+
+    '1. No cooldown',
+    '2. Speed food 30s',
+    '❎ Exit ❎',
+    }
+    ,nil,
+   'Menu support đua Heroic: ')
+    
+    if menu2 == nil then else
+    if menu2[1] == true then NoCoolDown() end
+    if menu2[2] == true then SpeedFood() end
+    if menu2[3] ==true then START() end 
+ end end
+
+ function SpeedFood()
+gg.setRanges(gg.REGION_C_ALLOC | gg.REGION_ANONYMOUS)
+gg.searchNumber("30;5~6;25;250", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+gg.refineNumber("30", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+gg.getResults(1000, nil, nil, nil, nil, nil, nil, nil, nil)
+gg.editAll("0", gg.TYPE_DWORD)
+gg.refineNumber("999998", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+end
+
+function NoCoolDown()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-2 000 000 000~-1 000 000 000;2;300~86400;0::13', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('3~1000000', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(10000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()
+end
+
+
+function Start4()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-300~300F;1 065 353 216;1 065 353 216;2~1000;10~10000::17', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('1 065 353 216', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(5000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-300~300F;1 073 741 824;1 073 741 824::9', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('1 073 741 824', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(5000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-300~300F;1 077 936 128;1 077 936 128::9', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('1 077 936 128', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(5000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-300~300F;1 082 130 432;1 082 130 432::9', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('1 082 130 432', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(5000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-300~300F;1 084 227 584;1 084 227 584::9', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('1 084 227 584', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(5000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()
+    gg.setRanges(gg.REGION_C_ALLOC)
+    gg.searchNumber('-300~300F;1 086 324 736;1 086 324 736::9', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.refineNumber('1 086 324 736', gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1)
+    gg.getResults(5000)
+    gg.editAll('0', gg.TYPE_DWORD)
+    gg.clearResults()    
+end
+
+function noselect() 
+gg.toast('--------------------------------------Trung2k3dz-------------------------------------') 
+end 
+function ends()
+    gg.toast('--------------------------------------Exit-------------------------------------') 
+    os.exit()
+end
+if menuk == 1 then START() end 
+end 
+
+
+
+
+    							

@@ -1,0 +1,196 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using ShoeApp.ViewModels;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@model IEnumerable<UserViewModel>
+
+
+
+
+
+
+
+
+@{
+
+    ViewData["Page"] = "Người dùng";
+    ViewData["Title"] = "Danh sách người dùng";
+}
+<div>
+    <div class="card-header pb-0">
+        <div class="d-lg-flex">
+            <div>
+                <h5 class="mb-0">@ViewData["Title"] </h5>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+                <div class="ms-auto my-auto">
+                    <a asp-action="Create" asp-controller="Role" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Thêm mới</a>
+                    <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
+                        Import
+                    </button>
+                    <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog mt-lg-10">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+                                    <i class="fas fa-upload ms-3"></i>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>You can browse your computer for a file.</p>
+                                    <input type="text" placeholder="Browse file..." class="form-control mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
+                                        <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-flush" id="datatable-search">
+            <thead class="thead-light">
+                <tr>
+                    <th></th>
+                    <th>Tên</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th>Trạng thái</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @if (item.ProfilePicture != null && item.ProfilePicture.Length > 0)
+                            {
+                                <img class="avatar rounded-circle" alt="profile" src="data:image/*;base64,@(Convert.ToBase64String(item.ProfilePicture))" />
+                            }
+                            else
+                            {
+                                <img class="avatar rounded-circle" alt="profile" src="~/fileAdmin/img/avtDefault.png" />
+                            }
+                        </td>
+                        <td>@item.LastName</td>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>
+                            @if (item.Roles.Count() == 0)
+                            {
+                                <span>No role</span>
+                            }
+                            else
+                            {
+                                @string.Join(" , ", item.Roles.ToList())
+                                ;
+
+                            }
+                        </td>
+                        <td>
+
+                            @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
+                            {
+                                <span class="badge badge-success badge-sm">Hoạt động</span>
+
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger badge-sm">Khoá</span>
+                            }
+
+
+                        </td>
+                        <td>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <a asp-action="Edit" asp-route-userId="@item.Id" class="btn btn-info text-white" style="cursor:pointer"><i class="fas fa-user-edit text-secondary"></i>Sửa</a>
+                                <form asp-action="LockUnlock" asp-route-userId="@item.Id" method="post">
+
+                                    @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
+                                    {
+                                        <button type="submit" class="btn btn-success text-white" style="cursor:pointer">
+                                            <span>Khoá</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-warning text-white" style="cursor:pointer">
+                                            <span>Mở khoá</span>
+                                        </button>
+                                    }
+                                </form>
+                                <form asp-action="Delete" asp-route-userId="@item.Id" method="post">
+                                    <button type="submit" id="deleteButton" class="btn btn-danger">
+                                        <span> <i class="fas fa-trash text-secondary"></i> Xoá</span>
+                                    </button>
+                                </form>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                    <script>
+                        document.querySelector('#deleteButton').addEventListener('click', function (event) {
+                            // Ngăn chặn hành vi mặc định của nút submit
+                            event.preventDefault();
+
+                            Swal.fire({
+                                title: 'Bạn có chắc chắn muốn xoá không?',
+                                text: 'Dữ liệu sẽ không thể khôi phục sau khi xoá!',
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText: 'Có, xoá nó!',
+                                cancelButtonText: 'Không, giữ lại!'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // Thêm mã để xoá dữ liệu ở đây
+                                    // Ví dụ: gửi form
+                                    event.target.form.submit();
+                                }
+                            });
+                        });
+
+                    </script>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<partial name="_PagingAdmin" />
+
+<script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: true
+    });
+    document.querySelectorAll(".export").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+            var type = el.dataset.type;
+
+            var data = {
+                type: type,
+                filename: "soft-ui-" + type,
+            };
+
+            if (type === "csv") {
+                data.columnDelimiter = "|";
+            }
+
+            dataTableSearch.export(data);
+        });
+    });
+</script>

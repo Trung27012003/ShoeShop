@@ -1,0 +1,40 @@
+﻿@using ShoeApp.ViewModels;
+@model UserViewModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post" asp-action="Edit">
+            <input asp-for="@Model.Id" hidden />
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" readonly class="form-control" />
+                <input asp-for="Email" hidden />
+            </div>
+            <div class="form-group">
+                <label for="Role">Role</label>
+                <select class="form-control" id="Role" asp-for="Roles">
+                    @foreach (var role in ViewBag.Roles)
+                    {
+                        <option value="@role.Value">@role.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Update</button>
+                <a asp-action="Index" class="btn btn-warning" style="width:auto">Back to User</a>
+            </div>
+        </form>
+    </div>
+</div>

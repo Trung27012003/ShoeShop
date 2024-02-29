@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="MailKit" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.27" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.27" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.27" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.27" />
@@ -25,11 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="IServices\" />
     <Folder Include="wwwroot\fileUser\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

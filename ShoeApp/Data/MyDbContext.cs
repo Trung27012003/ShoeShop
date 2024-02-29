@@ -113,6 +113,7 @@ namespace ShoeApp.Data
         public DbSet<ProductImage> ProductImage { get; set; }
         public DbSet<ProductDetail> ProductDetail { get; set; }
         public DbSet<Size> Size { get; set; }
+        public DbSet<Color> Color { get; set; }
         public DbSet<Voucher> Voucher { get; set; }
         public DbSet<UserVoucher> VoucherUser { get; set; }
         public DbSet<Rate> Rate { get; set; }

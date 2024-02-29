@@ -43,7 +43,7 @@
                             <form id="account" method="post">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="mb-3">
-                                    <input asp-for="Input.Email" type="email" class="form-control" placeholder="Email" aria-label="Email" autocomplete="username" aria-required="true" />
+                                    <input asp-for="Input.Email" type="email" class="form-control" autocomplete="username" aria-required="true" placeholder="Email" aria-label="Email" />
                                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                                 </div>
                                 <div class="mb-3">
@@ -62,10 +62,11 @@
                                         or
                                     </p>
                                 </div>
-                                <div class="text-center">
-                                    <button type="button" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn bg-gradient-dark w-100 mt-2 mb-4">Sign up</button>
-                                </div>
+                               
                             </form>
+                            <div class="text-center">
+                                <button type="button" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="btn bg-gradient-dark w-100 mt-2 mb-4">Đăng kí</button>
+                            </div>
                         </div>
                     </div>
                 </div>

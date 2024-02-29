@@ -21,6 +21,7 @@ namespace ShoeApp.Models
         public decimal? TotalAmoutAfterApplyingVoucher { get; set; } // giá sau khi áp voucher
         public decimal? ShippingFee { get; set; } // phí ship
         public DateTime? Create_Date { get; set; } // ngày tạo bill
+        public DateTime? Update_Date { get; set; } // ngày update bill
         public DateTime? Ship_Date { get; set; } // ngày Ship
         public DateTime? Payment_Date { get; set; } // ngày thanh toán
         public DateTime? Delivery_Date { get; set; } // ngày nhận hàng

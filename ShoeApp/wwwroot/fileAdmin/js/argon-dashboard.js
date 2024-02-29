@@ -15,7 +15,7 @@
     };
 
     if (document.getElementsByClassName('navbar-collapse')[0]) {
-      var fixedplugin = document.querySelector('.navbar-collapse');
+      var fixedplugin = document.querySelector('.navbar:not(.navbar-expand-lg) .navbar-collapse');
       var ps2 = new PerfectScrollbar(fixedplugin);
     };
 
@@ -1078,17 +1078,17 @@ var argon = {
             className: 'event-azure'
           },
           {
-            title: 'Click for Oscar Bahamonde',
+            title: 'Click for Creative Tim',
             start: new Date(y, m, 21),
             end: new Date(y, m, 22),
-            url: 'http://www.oscarbahamonde.com/',
+            url: 'http://www.creative-tim.com/',
             className: 'event-orange'
           },
           {
             title: 'Click for Google',
             start: new Date(y, m, 23),
             end: new Date(y, m, 23),
-            url: 'http://www.oscarbahamonde.com/',
+            url: 'http://www.creative-tim.com/',
             className: 'event-orange'
           }
         ]
