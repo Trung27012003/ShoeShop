@@ -12,8 +12,8 @@ using ShoeApp.Data;
 namespace ShoeApp.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240226090930_mg")]
-    partial class mg
+    [Migration("20240229162040_mgs")]
+    partial class mgs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,21 +54,21 @@ namespace ShoeApp.Migrations
                         new
                         {
                             Id = "2FA6148D-B530-421F-878E-CE1D54BFC6AB",
-                            ConcurrencyStamp = "8933ad84-3605-447c-b79c-cd21764b9690",
+                            ConcurrencyStamp = "499aeed1-303a-4ccb-9679-a8c84d18506a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3bd5519e-5a0b-4e20-af54-bd795c74f3c7",
-                            ConcurrencyStamp = "5755b571-5269-46dd-8a8b-02523e53c105",
+                            Id = "29b7142b-8d9a-49f8-98b1-43678b2ba53f",
+                            ConcurrencyStamp = "aaedc47b-96ed-440a-8b43-0453c9714043",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
                             Id = "2FA6148D-B530-421F-878E-CE4D54BFC6AB",
-                            ConcurrencyStamp = "25a78b49-1671-4291-b6bc-3bd7e0f3c873",
+                            ConcurrencyStamp = "34f3f70a-2575-4114-86a1-782d3475ea85",
                             Name = "Guest",
                             NormalizedName = "GUEST"
                         });
@@ -234,27 +234,27 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("04a60b57-f190-498c-a20a-587914ac85df"),
+                            Id = new Guid("3b8f8889-64a9-45d1-afd4-666f38178703"),
                             BrandName = "Brand 1"
                         },
                         new
                         {
-                            Id = new Guid("da501de2-09b4-49a7-895b-b32d7a53e62a"),
+                            Id = new Guid("a1e18687-91b4-4f34-99ea-32595283f774"),
                             BrandName = "Brand 2"
                         },
                         new
                         {
-                            Id = new Guid("33edf172-288a-403c-9eb5-2cf23c50f962"),
+                            Id = new Guid("b03f49b4-8f5e-4f39-9d80-88926f225cfc"),
                             BrandName = "Brand 3"
                         },
                         new
                         {
-                            Id = new Guid("aa99d901-be53-49f0-8cfc-7aa379dc6fb1"),
+                            Id = new Guid("f347d49f-efad-4ae2-befd-ea500e7ef08e"),
                             BrandName = "Brand 4"
                         },
                         new
                         {
-                            Id = new Guid("a319d7c8-af4d-44f8-a07f-922b4474fe92"),
+                            Id = new Guid("fe01b552-c04a-4fc1-8ce5-86a20f932ada"),
                             BrandName = "Brand 5"
                         });
                 });
@@ -319,27 +319,27 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dc349f04-7df1-4faa-abd5-88f115d83c1c"),
+                            Id = new Guid("bbc9c1b9-0559-415f-99c4-78af03215a05"),
                             CategoryName = "Category 1"
                         },
                         new
                         {
-                            Id = new Guid("54f8d2a7-e8f5-49da-888e-fa68d7c04156"),
+                            Id = new Guid("305837f7-7f84-4ed9-807a-ef409d902c34"),
                             CategoryName = "Category 2"
                         },
                         new
                         {
-                            Id = new Guid("f5fea705-b4ee-49cb-aff8-e20b5bbf1194"),
+                            Id = new Guid("00570a1f-1e66-42a9-8826-47638153526f"),
                             CategoryName = "Category 3"
                         },
                         new
                         {
-                            Id = new Guid("2dcef8da-3c3c-4059-85f5-f95df0233d63"),
+                            Id = new Guid("e17db99f-7ba7-4c42-98f6-52c723efba97"),
                             CategoryName = "Category 4"
                         },
                         new
                         {
-                            Id = new Guid("9368a10f-97f8-48f4-9f55-afec814dfb69"),
+                            Id = new Guid("27ccea97-e148-44e8-a247-7947ea1aaacd"),
                             CategoryName = "Category 5"
                         });
                 });
@@ -363,97 +363,97 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            ColorId = new Guid("cff4029c-c685-49e7-a03a-d42af8fd25a5"),
+                            ColorId = new Guid("b3e16dd0-2c84-45b5-b28c-25d80f64e6d0"),
                             ColorCode = "#000000",
                             ColorName = "Đen"
                         },
                         new
                         {
-                            ColorId = new Guid("4ef0ab43-6278-432a-adda-cf26303747d6"),
+                            ColorId = new Guid("bf704dcb-4bb6-4448-8958-90e8bbcc009c"),
                             ColorCode = "#FFFFFF",
                             ColorName = "Trắng"
                         },
                         new
                         {
-                            ColorId = new Guid("a51ccab9-767e-4b3e-b7d5-f8ac9e4516dc"),
+                            ColorId = new Guid("9edc0745-73d7-44b6-8e14-0b58e2d860cf"),
                             ColorCode = "#FF0000",
                             ColorName = "Đỏ"
                         },
                         new
                         {
-                            ColorId = new Guid("2a649526-a13a-40c2-89e7-efc071e60ffb"),
+                            ColorId = new Guid("83a00f68-b876-4162-8cbe-67afd9ea25b9"),
                             ColorCode = "#00FF00",
                             ColorName = "Xanh lá cây"
                         },
                         new
                         {
-                            ColorId = new Guid("b4af8b14-afa6-424c-9b22-2cbbb076f17f"),
+                            ColorId = new Guid("28421c0e-d841-4ebb-819a-380dbcbfb7a4"),
                             ColorCode = "#0000FF",
                             ColorName = "Xanh dương"
                         },
                         new
                         {
-                            ColorId = new Guid("77fab2f2-4e19-43ed-bb1a-7c0108cf5c38"),
+                            ColorId = new Guid("5e08f373-67c6-47c0-aac8-eeb02be0afa8"),
                             ColorCode = "#FFFF00",
                             ColorName = "Vàng"
                         },
                         new
                         {
-                            ColorId = new Guid("7cf895d7-41b4-4641-b933-76daea321721"),
+                            ColorId = new Guid("e4e9bd0e-3acc-4afa-b57d-9832edbcacee"),
                             ColorCode = "#FFA500",
                             ColorName = "Cam"
                         },
                         new
                         {
-                            ColorId = new Guid("9a5b4a30-83d5-47d1-894a-08470a5aca3e"),
+                            ColorId = new Guid("cd763ff4-4723-40d8-9fed-402b0de403f8"),
                             ColorCode = "#800080",
                             ColorName = "Tím"
                         },
                         new
                         {
-                            ColorId = new Guid("75f20c50-57f2-4af4-9d28-56ba4c0efae6"),
+                            ColorId = new Guid("41373f1b-ed52-4ca8-8538-8c0a7b7ff57c"),
                             ColorCode = "#FFC0CB",
                             ColorName = "Hồng"
                         },
                         new
                         {
-                            ColorId = new Guid("42705878-835e-4255-8a3a-049f050f259c"),
+                            ColorId = new Guid("7d81a39b-be5d-4583-bd20-7a8287777261"),
                             ColorCode = "#808080",
                             ColorName = "Xám"
                         },
                         new
                         {
-                            ColorId = new Guid("069544b3-0588-416d-9629-b312f5e4080a"),
+                            ColorId = new Guid("a61ff1bb-8176-4724-a61a-c0a219de6aa1"),
                             ColorCode = "#A52A2A",
                             ColorName = "Nâu"
                         },
                         new
                         {
-                            ColorId = new Guid("7867fdca-e319-47d5-98ed-ae1a4836134f"),
+                            ColorId = new Guid("9894692c-b1b9-42f8-8541-e21f4176199b"),
                             ColorCode = "#000080",
                             ColorName = "Xanh lam"
                         },
                         new
                         {
-                            ColorId = new Guid("6e32d452-3afe-419d-9c00-cc4b57db7b04"),
+                            ColorId = new Guid("24007e54-e39d-44c7-b8ca-fd74fc0ffd2d"),
                             ColorCode = "#00BFFF",
                             ColorName = "Xanh da trời"
                         },
                         new
                         {
-                            ColorId = new Guid("a8243496-58b0-4c85-970a-e835e9d40ff5"),
+                            ColorId = new Guid("5d3d8fc5-dd3d-4474-a717-31ce6f3ae020"),
                             ColorCode = "#FFDAB9",
                             ColorName = "Hồng phấn"
                         },
                         new
                         {
-                            ColorId = new Guid("b34fdfd5-5bf2-4e96-b0a6-ea2ea40a17ad"),
+                            ColorId = new Guid("d8f15d3e-bda9-4424-93a4-729f3363d02a"),
                             ColorCode = "#C0C0C0",
                             ColorName = "Xám tro"
                         },
                         new
                         {
-                            ColorId = new Guid("cd4e8385-794a-46e1-9ced-2331cf19c7fa"),
+                            ColorId = new Guid("b8907027-eb38-49f2-8cc3-ed0f44b35b99"),
                             ColorCode = "#C0C0C0",
                             ColorName = "Bạc"
                         });
@@ -636,8 +636,8 @@ namespace ShoeApp.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Status")
-                        .HasColumnType("int");
+                    b.Property<bool?>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Tittle")
                         .HasColumnType("nvarchar(max)");
@@ -710,7 +710,7 @@ namespace ShoeApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ColorId")
+                    b.Property<Guid>("ColorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("Create_At")
@@ -725,7 +725,7 @@ namespace ShoeApp.Migrations
                     b.Property<decimal?>("PriceSale")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("ProductId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("Quantity")
@@ -734,7 +734,7 @@ namespace ShoeApp.Migrations
                     b.Property<string>("SKU")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("SizeId")
+                    b.Property<Guid>("SizeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool?>("Status")
@@ -805,14 +805,14 @@ namespace ShoeApp.Migrations
                         },
                         new
                         {
-                            Id = new Guid("79a73ffc-889c-4e2c-bace-e2420cec43d1"),
+                            Id = new Guid("ea375335-d0e4-41fc-8c42-74ce57d0ca8f"),
                             Name = "Vàng",
                             PoinsMax = 3000000,
                             PointsMin = 1000001
                         },
                         new
                         {
-                            Id = new Guid("ab9f7bd6-ccc3-4ed9-b3a0-ee30d225af7a"),
+                            Id = new Guid("515cf98a-d64b-42c4-9aca-ff85a1292a0e"),
                             Name = "Kim Cương",
                             PoinsMax = 10000000,
                             PointsMin = 3000001
@@ -866,27 +866,27 @@ namespace ShoeApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("352d35d1-f72e-46ad-bda4-28621dfad9e4"),
+                            Id = new Guid("126064e8-a8f8-42fe-a8cc-58ddf1c0cb14"),
                             SizeName = "Size 1"
                         },
                         new
                         {
-                            Id = new Guid("3a2e2229-379e-41e0-b46e-7c9f0739ca8e"),
+                            Id = new Guid("7f2e5cfe-241c-4a62-a5d1-b67c76c66624"),
                             SizeName = "Size 2"
                         },
                         new
                         {
-                            Id = new Guid("30c5b71a-bf4e-4413-9b1f-9ee75c152213"),
+                            Id = new Guid("b6e97070-f82b-4855-90bc-71d99ee253b9"),
                             SizeName = "Size 3"
                         },
                         new
                         {
-                            Id = new Guid("99407c55-9b46-4c88-aede-39308debe014"),
+                            Id = new Guid("ec04dd6c-a70c-446f-914c-3c65e2c79f08"),
                             SizeName = "Size 4"
                         },
                         new
                         {
-                            Id = new Guid("05fb222c-8852-4079-ae64-5bfa88f4be59"),
+                            Id = new Guid("0034009c-7a64-42fe-929a-6e44c9f6d6a6"),
                             SizeName = "Size 5"
                         });
                 });
@@ -980,14 +980,14 @@ namespace ShoeApp.Migrations
                         {
                             Id = "2FA6148D-B530-421F-878E-CE4D54BFC6AB",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0ff364a3-c12e-4c8a-988b-33289907dcde",
+                            ConcurrencyStamp = "559a6330-4d90-4485-8a4d-323ea5c78db2",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
                             NormalizedUserName = "GUEST",
                             PhoneNumberConfirmed = false,
                             Points = 0,
                             RankId = new Guid("2fa0118d-b530-421f-878e-ce4d54bfc6ab"),
-                            SecurityStamp = "c540e8d1-3718-48ff-8b83-f310bf95465d",
+                            SecurityStamp = "0f068128-927b-45a0-a5dd-7c1563718f74",
                             TwoFactorEnabled = false,
                             UserName = "Guest"
                         });
@@ -1212,15 +1212,21 @@ namespace ShoeApp.Migrations
                 {
                     b.HasOne("ShoeApp.Models.Color", "Colors")
                         .WithMany("ProductDetails")
-                        .HasForeignKey("ColorId");
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ShoeApp.Models.Product", "Product")
                         .WithMany("ProductDetails")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ShoeApp.Models.Size", "Size")
                         .WithMany("ProductDetails")
-                        .HasForeignKey("SizeId");
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Colors");
 

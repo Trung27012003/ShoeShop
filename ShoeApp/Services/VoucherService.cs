@@ -104,6 +104,7 @@ namespace ShoeApp.Services
                 if (obj != null)
                 {
                     obj.VoucherCode = model.VoucherCode;
+                    obj.Title = model.Title;
                     obj.Quantity = model.Quantity;
                     obj.Value = model.Value;
                     obj.Discount_Type = model.Discount_Type;

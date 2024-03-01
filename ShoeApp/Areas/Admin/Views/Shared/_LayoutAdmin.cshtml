@@ -20,7 +20,11 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="~/fileAdmin/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="~/fileAdmin/css/argon-dashboard.css?v=2.0.0" rel="stylesheet" />
+    <link id="pagestyle" href="~/fileAdmin/css/argon-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <script src="~/fileAdmin/js/plugins/choices.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/dropzone.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/quill.min.js"></script>
+    <script src="~/fileAdmin/js/plugins/multistep-form.js"></script>
 
     <script src="~/fileAdmin/js/plugins/datatables.js"></script>
     <script src="~/fileAdmin/js/core/popper.min.js"></script>
@@ -84,6 +88,14 @@
                         <span class="sidenav-normal"> Quản lí chức vụ </span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="Admin" asp-controller="Rank" asp-action="index">
+                        <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                            <i class="ni ni-shop text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="sidenav-normal"> Quản lí xếp hạng </span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link "
@@ -102,31 +114,25 @@
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#">
-                                    <span class="sidenav-mini-icon"> PD </span>
-                                    <span class="sidenav-normal"> Sản phẩm biến thể</span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link " href="#">
+                                <a class="nav-link " asp-area="Admin" asp-controller="Brand" asp-action="index">
                                     <span class="sidenav-mini-icon"> BR </span>
                                     <span class="sidenav-normal"> Hãng sản xuất</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#">
+                                <a class="nav-link " asp-area="Admin" asp-controller="Category" asp-action="index">
                                     <span class="sidenav-mini-icon"> CT </span>
                                     <span class="sidenav-normal"> Loại sản phẩm</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#">
+                                <a class="nav-link " asp-area="Admin" asp-controller="Color" asp-action="index">
                                     <span class="sidenav-mini-icon"> CL </span>
                                     <span class="sidenav-normal"> Màu sắc</span>
                                 </a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#">
+                                <a class="nav-link " asp-area="Admin" asp-controller="Size" asp-action="index">
                                     <span class="sidenav-mini-icon"> SZ </span>
                                     <span class="sidenav-normal"> Kích cỡ</span>
                                 </a>
@@ -137,7 +143,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " asp-area="Admin" asp-controller="Order" asp-action="index">
                         <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
                         </div>
@@ -145,7 +151,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " asp-action="Index" asp-controller="Post" asp-area="Admin">
                         <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
                         </div>
@@ -153,7 +159,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">
+                    <a class="nav-link " asp-area="Admin" asp-controller="Voucher" asp-action="index">
                         <div class="icon https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/default.html-shape icon-sm text-center d-flex align-items-center justify-content-center">
                             <i class="ni ni-shop text-primary text-sm opacity-10"></i>
                         </div>
@@ -225,8 +231,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
         </div>
     </main>
     <div class="fixed-plugin">

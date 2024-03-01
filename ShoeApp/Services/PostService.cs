@@ -64,7 +64,10 @@ namespace ShoeApp.Services
         {
             try
             {
-                var obj = await _context.Posts.FindAsync(Id);
+                var lstObj = await _context.Posts
+                   .Include(c => c.User)
+                   .ToListAsync();
+                var obj =  lstObj.FirstOrDefault(c=>c.Id==Id);
                 if (obj != null)
                 {
                     return obj;
@@ -84,7 +87,9 @@ namespace ShoeApp.Services
         {
             try
             {
-                var lstObj = await _context.Posts.ToListAsync();
+                var lstObj = await _context.Posts
+                    .Include(c => c.User)
+                    .ToListAsync();
                 return lstObj;
             }
             catch (Exception e)

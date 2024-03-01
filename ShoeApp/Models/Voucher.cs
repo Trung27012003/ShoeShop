@@ -7,6 +7,7 @@ namespace ShoeApp.Models
         [Key]
         public Guid Id { get; set; }
         public string? VoucherCode { get; set; } //
+        public string? Title { get; set; } //
         public int? Quantity { get; set; } // số lượng
         public decimal? Value { get; set; } // giá trị voucher
         public int? Discount_Type { get; set; } // hinh thuc giam gia, 1 là %, 0 là theo tiền mặt

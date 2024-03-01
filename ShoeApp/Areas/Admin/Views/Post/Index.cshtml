@@ -1,0 +1,158 @@
+﻿@model IEnumerable<ShoeApp.Models.Post>
+@{
+
+    ViewData["Page"] = "Bài đăng";
+    ViewData["Title"] = "Danh sách bài viết";
+}
+<div>
+    <div class="card-header pb-0">
+        <div class="d-lg-flex">
+            <div>
+                <h5 class="mb-0">@ViewData["Title"] </h5>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+                <div class="ms-auto my-auto">
+                    <a asp-action="Create" asp-controller="Post" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Thêm mới</a>
+                    <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
+                        Import
+                    </button>
+                    <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog mt-lg-10">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+                                    <i class="fas fa-upload ms-3"></i>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>You can browse your computer for a file.</p>
+                                    <input type="text" placeholder="Browse file..." class="form-control mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="importCheck" checked="">
+                                        <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-flush" id="datatable-search">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Ảnh
+                    </th>
+                    <th>
+                        Người đăng
+                    </th>
+                    <th>
+                        Tiêu đề
+                    </th>
+
+                    <th>
+                        Ngày đăng
+                    </th>
+                    <th>
+                        Ngày cập nhật
+                    </th>
+                    <th>
+                        Mô tả
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img class="avatar rounded-circle" alt="profile" src="@item.TittleImage" />
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tittle)
+                        </td>
+                        <td>
+                            @item.CreateAt?.ToString("dd-MM-yyyy")
+                        </td>
+                        <td>
+                            @if (item.UpdateAt != null)
+                            {
+                                @item.UpdateAt?.ToString("dd-MM-yyyy")
+
+                            }
+                            else
+                            {
+                                <span>Chưa cập nhật</span>
+                            }
+                        </td>
+                        <td>
+                            @item.Description
+                        </td>
+                        <td>
+                            @if (item.Status == true)
+                            {
+                                <a asp-action="ChangeStatus" asp-route-postId="@item.Id">
+                                    <span class="badge bg-gradient-success">Đã xuất bản</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a asp-action="ChangeStatus" asp-route-postId="@item.Id">
+                                    <span class="badge bg-gradient-danger">Ngừng xuất bản</span>
+                                </a>
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-postId="@item.Id">
+                                <i class="fas fa-user-edit text-secondary">Sửa</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<partial name="_PagingAdmin" />
+
+<script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: true
+    });
+    document.querySelectorAll(".export").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+            var type = el.dataset.type;
+
+            var data = {
+                type: type,
+                filename: "soft-ui-" + type,
+            };
+
+            if (type === "csv") {
+                data.columnDelimiter = "|";
+            }
+
+            dataTableSearch.export(data);
+        });
+    });
+</script>

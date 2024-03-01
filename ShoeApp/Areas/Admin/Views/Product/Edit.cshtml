@@ -19,13 +19,19 @@
         <div class="multisteps-form__content">
             <div class="row mt-3">
                 <div class="col-12 col-sm-12">
+                    <label>Mã sản phẩm </label>
+                    <input asp-for="ProductCode" value="@Model.ProductCode" class="multisteps-form__input form-control" disabled />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 col-sm-12">
                     <label>Tên sản phẩm </label>
                     <input asp-for="ProductName" value="@Model.ProductName" class="multisteps-form__input form-control" />
                     <input asp-for="Id" value="@Model.Id" hidden />
-                    <input asp-for="ProductCode" value="1" hidden />
                     <span asp-validation-for="ProductName" class="text-danger"></span>
                 </div>
             </div>
+
             <div class="row mt-3">
                 <div class="col-16 col-sm-6">
                     <label>Category</label>
@@ -140,11 +146,8 @@
             success: function (response) {
                 // Nếu action trả về true, reload lại trang
                 if (response === true) {
-                    alert(response);
                     location.reload();
-                } else {
-                    alert(response);
-                }
+                } 
             },
             error: function () {
                 // Xử lý khi có lỗi xảy ra (nếu cần)

@@ -21,7 +21,7 @@ namespace ShoeApp.Areas.Admin.Controllers
         private readonly ISizeService _sizeService;
         private List<IFormFile> _lstIFormFile;
 
-        public ProductController(IProductService productService,IProductDetailService productDetailService, ICategoryService categoryService, IBrandService brandService, IProductImageService productImageService,ISizeService sizeService,IColorService colorService)
+        public ProductController(IProductService productService, IProductDetailService productDetailService, ICategoryService categoryService, IBrandService brandService, IProductImageService productImageService, ISizeService sizeService, IColorService colorService)
         {
             _productService = productService;
             _productDetailService = productDetailService;
@@ -36,7 +36,6 @@ namespace ShoeApp.Areas.Admin.Controllers
         {
             return View(await _productService.Gets());
         }
-        
         [HttpPost]
         public async Task<IActionResult> UploadImage(IFormFile file)
         {
@@ -75,7 +74,7 @@ namespace ShoeApp.Areas.Admin.Controllers
         [HttpPost]
         public async Task<bool> RemoveImageAsync(string productImageId)
         {
-            if (productImageId!=null)
+            if (productImageId != null)
             {
                 var id = Guid.Parse(productImageId);
                 var result = await _productImageService.Delete(id);
@@ -113,6 +112,32 @@ namespace ShoeApp.Areas.Admin.Controllers
         public async Task<IActionResult> Create(Product product/*,string tags*/)
         {
             //var listTags = tags.Split(',').ToList(); // thêm vào chuỗi string 
+
+
+            List<SelectListItem> ListCategoryitems = new List<SelectListItem>();
+            // Giả sử myList là danh sách dữ liệu của bạn
+            foreach (var obj in (await _categoryService.Gets()))
+            {
+                ListCategoryitems.Add(new SelectListItem()
+                {
+                    Text = obj.CategoryName,
+                    Value = obj.Id.ToString()
+                });
+            }
+            ViewBag.ListCategoryitems = ListCategoryitems;
+            List<SelectListItem> ListBranditems = new List<SelectListItem>();
+            // Giả sử myList là danh sách dữ liệu của bạn
+            foreach (var obj in await _brandService.Gets())
+            {
+                ListBranditems.Add(new SelectListItem()
+                {
+                    Text = obj.BrandName,
+                    Value = obj.Id.ToString()
+                });
+            }
+            ViewBag.ListBranditems = ListBranditems;
+
+
             string imageList = HttpContext.Session.GetString("ImageList");
             if (ModelState.IsValid)
             {
@@ -147,31 +172,6 @@ namespace ShoeApp.Areas.Admin.Controllers
 
             // Trả về view với thông báo lỗi nếu ModelState không hợp lệ hoặc không có tệp nào được tải lên
             ModelState.AddModelError("", "Vui lòng nhập đầy đủ các trường");
-
-
-
-            List<SelectListItem> ListCategoryitems = new List<SelectListItem>();
-            // Giả sử myList là danh sách dữ liệu của bạn
-            foreach (var obj in (await _categoryService.Gets()))
-            {
-                ListCategoryitems.Add(new SelectListItem()
-                {
-                    Text = obj.CategoryName,
-                    Value = obj.Id.ToString()
-                });
-            }
-            ViewBag.ListCategoryitems = ListCategoryitems;
-            List<SelectListItem> ListBranditems = new List<SelectListItem>();
-            // Giả sử myList là danh sách dữ liệu của bạn
-            foreach (var obj in await _brandService.Gets())
-            {
-                ListBranditems.Add(new SelectListItem()
-                {
-                    Text = obj.BrandName,
-                    Value = obj.Id.ToString()
-                });
-            }
-            ViewBag.ListBranditems = ListBranditems;
             return View(product);
         }
 
@@ -199,7 +199,7 @@ namespace ShoeApp.Areas.Admin.Controllers
                 });
             }
             ViewBag.ListBranditems = ListBranditems;
-            return View( await _productService.Get(productId));
+            return View(await _productService.Get(productId));
         }
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
@@ -230,20 +230,20 @@ namespace ShoeApp.Areas.Admin.Controllers
             string imageList = HttpContext.Session.GetString("ImageList");
             if (ModelState.IsValid)
             {
-              
+
                 var productDb = await _productService.Get(product.Id);
                 productDb.CategoryId = product.CategoryId;
                 productDb.BrandId = product.BrandId;
-                productDb.Update_At    = DateTime.Now;
+                productDb.Update_At = DateTime.Now;
                 productDb.Long_Description = product.Long_Description;
                 productDb.Status = false;
-                if (imageList == null && productDb.ProductImages.Count()==0) // check ảnh
+                if (imageList == null && productDb.ProductImages.Count() == 0) // check ảnh
                 {
                     // Trả về view với thông báo lỗi nếu ModelState không hợp lệ hoặc không có tệp nào được tải lên
                     ModelState.AddModelError("", "Ảnh sản phẩm tối thiểu là 1, vui lòng thêm ảnh.");
                     return View(product);
                 }
-                if (imageList!=null)
+                if (imageList != null)
                 {
                     List<string> imageListAsList = imageList.Split(';').ToList();
                     foreach (var item in imageListAsList)
@@ -265,7 +265,7 @@ namespace ShoeApp.Areas.Admin.Controllers
 
             // Trả về view với thông báo lỗi nếu ModelState không hợp lệ hoặc không có tệp nào được tải lên
             ModelState.AddModelError("", "Vui lòng nhập đầy đủ các trường");
-            return View(product);
+            return RedirectToAction("Edit", null, new { @productId = product.Id });
         }
         public async Task<IActionResult> ChangeStatus(Guid productId)
         {
@@ -287,7 +287,7 @@ namespace ShoeApp.Areas.Admin.Controllers
             var lstProductDetail = await _productDetailService.Gets();
 
             ViewBag.productId = productId;
-            var lstProductDetailFind = lstProductDetail.Where(c=>c.ProductId == productId);
+            var lstProductDetailFind = lstProductDetail.Where(c => c.ProductId == productId);
             return View(lstProductDetailFind);
         }
         public async Task<IActionResult> CreatePD(Guid productId) // create productdetail
@@ -316,7 +316,7 @@ namespace ShoeApp.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> CreatePD(ProductDetail productDetail) 
+        public async Task<IActionResult> CreatePD(ProductDetail productDetail)
         {
             List<SelectListItem> ListSizeitems = new List<SelectListItem>();
             foreach (var obj in (await _sizeService.Gets()))
@@ -345,12 +345,12 @@ namespace ShoeApp.Areas.Admin.Controllers
                 var size = await _sizeService.Get(productDetail.SizeId);
                 productDetail.Create_At = DateTime.Now;
                 productDetail.Description = "Description";
-                productDetail.SKU = product.ProductCode +"-"+ color.ColorName.Trim().Replace(" ", "_").ToUpper() +"-"+ size.SizeName.Trim().Replace(" ", "_").ToUpper();
+                productDetail.SKU = product.ProductCode + "-" + color.ColorName.Trim().Replace(" ", "_").ToUpper() + "-" + size.SizeName.Trim().Replace(" ", "_").ToUpper();
                 productDetail.Status = false;
                 var result = await _productDetailService.Add(productDetail);
                 if (result.IsSuccess)
                 {
-                    return RedirectToAction("ProductVariant", null, new { @productId =productDetail.ProductId });
+                    return RedirectToAction("ProductVariant", null, new { @productId = productDetail.ProductId });
                 }
             }
             ModelState.AddModelError("", "Vui lòng nhập đầy đủ các trường");
@@ -417,14 +417,14 @@ namespace ShoeApp.Areas.Admin.Controllers
                 var result = await _productDetailService.Update(productDT);
                 if (result.IsSuccess)
                 {
-                    return RedirectToAction("EditPD", null, new { @productPD = productDetail.Id });
+                    return RedirectToAction("ProductVariant", null, new { @productId = productDetail.ProductId });
                 }
 
             }
 
             // Trả về view với thông báo lỗi nếu ModelState không hợp lệ hoặc không có tệp nào được tải lên
             ModelState.AddModelError("", "Vui lòng nhập đầy đủ các trường");
-            return RedirectToAction("ProductVariant", null, new { @productId = productDetail.Id });
+            return RedirectToAction("EditPD", null, new { @productPD = productDetail.Id });
         }
         public async Task<IActionResult> ChangeStatusPD(Guid productPD) // change status productdetail
         {
@@ -439,7 +439,7 @@ namespace ShoeApp.Areas.Admin.Controllers
                 product.Status = true;
             }
             _productDetailService.Update(product);
-            return RedirectToAction("ProductVariant", null, new { @productId = product.Id });
+            return RedirectToAction("ProductVariant", null, new { @productId = product.ProductId });
 
         }
 

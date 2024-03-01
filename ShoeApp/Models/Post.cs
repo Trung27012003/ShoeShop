@@ -14,7 +14,7 @@ namespace ShoeApp.Models
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
         public string? Description { get; set; }
-        public int? Status { get; set; }
+        public bool Status { get; set; }
         [ForeignKey("UserId")]
         public User? User { get; set; }
     }

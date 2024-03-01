@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "name": "C#: ShoeApp",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}\\ShoeApp.csproj",
+      "launchConfigurationId": "TargetFramework=;ShoeApp"
+    }
+  ]
+}

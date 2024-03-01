@@ -63,6 +63,11 @@ public class OrderService: IOrderService
     {
         try
         {
+            var lstObj = await _context.Order
+                    .Include(c => c.User)
+                    .Include(c=>c.OrderStatus)
+                    .Include(c=>c.Voucher)
+                    .ToListAsync();
             var obj = await _context.Order.FindAsync(Id);
             if (obj != null)
             {
@@ -83,7 +88,11 @@ public class OrderService: IOrderService
     {
         try
         {
-            var lstObj = await _context.Order.ToListAsync();
+            var lstObj = await _context.Order
+                    .Include(c => c.User)
+                    .Include(c => c.OrderStatus)
+                    .Include(c => c.Voucher)
+                    .ToListAsync();
             return lstObj;
         }
         catch (Exception e)
@@ -99,6 +108,7 @@ public class OrderService: IOrderService
     {
         try
         {
+
             var obj = await _context.Order.FindAsync(model.Id);
             if (obj != null)
             {

@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ShoeApp.Models.Order>
+@{
+
+    ViewData["Page"] = "Đơn Hàng";
+    ViewData["Title"] = "Danh sách đơn hàng";
+}
+<div>
+    <div class="card-header pb-0">
+        <div class="d-lg-flex">
+            <div>
+                <h5 class="mb-0">@ViewData["Title"] </h5>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+                <div class="ms-auto my-auto">
+                    <a asp-action="Create" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Thêm mới</a>
+                    <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-flush" id="datatable-search">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Mã vận đơn
+                    </th>
+                    <th>
+                        Người mua
+                    </th>
+                    <th>
+                        Tổng tiền thanh toán
+                    </th>
+                    <th>
+                        Loại thanh toán
+                    </th>
+                    <th>
+                        Ngày mua hàng
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderCode)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAmout)
+                        </td>
+                        <td>
+                            @item.PaymentType
+                        </td>
+                        <td>
+                            @item.Create_Date?.ToString("dd/MM/yyyy HH:mm")
+                        </td>
+                        <td>
+                                    <span class="badge bg-gradient-success">@item.OrderStatus.OrderStatusName</span>
+                        </td>
+                        <td>
+                            <a asp-action="EditPD" asp-route-productPD="@item.Id">
+                                <i class="fas fa-eye text-secondary">Sửa</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<partial name="_PagingAdmin" />
+
+<script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: true
+    });
+    document.querySelectorAll(".export").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+            var type = el.dataset.type;
+
+            var data = {
+                type: type,
+                filename: "soft-ui-" + type,
+            };
+
+            if (type === "csv") {
+                data.columnDelimiter = "|";
+            }
+
+            dataTableSearch.export(data);
+        });
+    });
+</script>

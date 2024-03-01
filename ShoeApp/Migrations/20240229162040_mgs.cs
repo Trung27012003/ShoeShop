@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ShoeApp.Migrations
 {
-    public partial class mg : Migration
+    public partial class mgs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -222,9 +222,9 @@ namespace ShoeApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SizeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ColorId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SizeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ColorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SKU = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -241,17 +241,20 @@ namespace ShoeApp.Migrations
                         name: "FK_ProductDetail_Color_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Color",
-                        principalColumn: "ColorId");
+                        principalColumn: "ColorId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProductDetail_Product_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Product",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProductDetail_Size_SizeId",
                         column: x => x.SizeId,
                         principalTable: "Size",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -372,7 +375,7 @@ namespace ShoeApp.Migrations
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: true)
+                    Status = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -584,11 +587,11 @@ namespace ShoeApp.Migrations
                 columns: new[] { "Id", "BrandName" },
                 values: new object[,]
                 {
-                    { new Guid("04a60b57-f190-498c-a20a-587914ac85df"), "Brand 1" },
-                    { new Guid("33edf172-288a-403c-9eb5-2cf23c50f962"), "Brand 3" },
-                    { new Guid("a319d7c8-af4d-44f8-a07f-922b4474fe92"), "Brand 5" },
-                    { new Guid("aa99d901-be53-49f0-8cfc-7aa379dc6fb1"), "Brand 4" },
-                    { new Guid("da501de2-09b4-49a7-895b-b32d7a53e62a"), "Brand 2" }
+                    { new Guid("3b8f8889-64a9-45d1-afd4-666f38178703"), "Brand 1" },
+                    { new Guid("a1e18687-91b4-4f34-99ea-32595283f774"), "Brand 2" },
+                    { new Guid("b03f49b4-8f5e-4f39-9d80-88926f225cfc"), "Brand 3" },
+                    { new Guid("f347d49f-efad-4ae2-befd-ea500e7ef08e"), "Brand 4" },
+                    { new Guid("fe01b552-c04a-4fc1-8ce5-86a20f932ada"), "Brand 5" }
                 });
 
             migrationBuilder.InsertData(
@@ -596,11 +599,11 @@ namespace ShoeApp.Migrations
                 columns: new[] { "Id", "CategoryName" },
                 values: new object[,]
                 {
-                    { new Guid("2dcef8da-3c3c-4059-85f5-f95df0233d63"), "Category 4" },
-                    { new Guid("54f8d2a7-e8f5-49da-888e-fa68d7c04156"), "Category 2" },
-                    { new Guid("9368a10f-97f8-48f4-9f55-afec814dfb69"), "Category 5" },
-                    { new Guid("dc349f04-7df1-4faa-abd5-88f115d83c1c"), "Category 1" },
-                    { new Guid("f5fea705-b4ee-49cb-aff8-e20b5bbf1194"), "Category 3" }
+                    { new Guid("00570a1f-1e66-42a9-8826-47638153526f"), "Category 3" },
+                    { new Guid("27ccea97-e148-44e8-a247-7947ea1aaacd"), "Category 5" },
+                    { new Guid("305837f7-7f84-4ed9-807a-ef409d902c34"), "Category 2" },
+                    { new Guid("bbc9c1b9-0559-415f-99c4-78af03215a05"), "Category 1" },
+                    { new Guid("e17db99f-7ba7-4c42-98f6-52c723efba97"), "Category 4" }
                 });
 
             migrationBuilder.InsertData(
@@ -608,22 +611,22 @@ namespace ShoeApp.Migrations
                 columns: new[] { "ColorId", "ColorCode", "ColorName" },
                 values: new object[,]
                 {
-                    { new Guid("069544b3-0588-416d-9629-b312f5e4080a"), "#A52A2A", "Nâu" },
-                    { new Guid("2a649526-a13a-40c2-89e7-efc071e60ffb"), "#00FF00", "Xanh lá cây" },
-                    { new Guid("42705878-835e-4255-8a3a-049f050f259c"), "#808080", "Xám" },
-                    { new Guid("4ef0ab43-6278-432a-adda-cf26303747d6"), "#FFFFFF", "Trắng" },
-                    { new Guid("6e32d452-3afe-419d-9c00-cc4b57db7b04"), "#00BFFF", "Xanh da trời" },
-                    { new Guid("75f20c50-57f2-4af4-9d28-56ba4c0efae6"), "#FFC0CB", "Hồng" },
-                    { new Guid("77fab2f2-4e19-43ed-bb1a-7c0108cf5c38"), "#FFFF00", "Vàng" },
-                    { new Guid("7867fdca-e319-47d5-98ed-ae1a4836134f"), "#000080", "Xanh lam" },
-                    { new Guid("7cf895d7-41b4-4641-b933-76daea321721"), "#FFA500", "Cam" },
-                    { new Guid("9a5b4a30-83d5-47d1-894a-08470a5aca3e"), "#800080", "Tím" },
-                    { new Guid("a51ccab9-767e-4b3e-b7d5-f8ac9e4516dc"), "#FF0000", "Đỏ" },
-                    { new Guid("a8243496-58b0-4c85-970a-e835e9d40ff5"), "#FFDAB9", "Hồng phấn" },
-                    { new Guid("b34fdfd5-5bf2-4e96-b0a6-ea2ea40a17ad"), "#C0C0C0", "Xám tro" },
-                    { new Guid("b4af8b14-afa6-424c-9b22-2cbbb076f17f"), "#0000FF", "Xanh dương" },
-                    { new Guid("cd4e8385-794a-46e1-9ced-2331cf19c7fa"), "#C0C0C0", "Bạc" },
-                    { new Guid("cff4029c-c685-49e7-a03a-d42af8fd25a5"), "#000000", "Đen" }
+                    { new Guid("24007e54-e39d-44c7-b8ca-fd74fc0ffd2d"), "#00BFFF", "Xanh da trời" },
+                    { new Guid("28421c0e-d841-4ebb-819a-380dbcbfb7a4"), "#0000FF", "Xanh dương" },
+                    { new Guid("41373f1b-ed52-4ca8-8538-8c0a7b7ff57c"), "#FFC0CB", "Hồng" },
+                    { new Guid("5d3d8fc5-dd3d-4474-a717-31ce6f3ae020"), "#FFDAB9", "Hồng phấn" },
+                    { new Guid("5e08f373-67c6-47c0-aac8-eeb02be0afa8"), "#FFFF00", "Vàng" },
+                    { new Guid("7d81a39b-be5d-4583-bd20-7a8287777261"), "#808080", "Xám" },
+                    { new Guid("83a00f68-b876-4162-8cbe-67afd9ea25b9"), "#00FF00", "Xanh lá cây" },
+                    { new Guid("9894692c-b1b9-42f8-8541-e21f4176199b"), "#000080", "Xanh lam" },
+                    { new Guid("9edc0745-73d7-44b6-8e14-0b58e2d860cf"), "#FF0000", "Đỏ" },
+                    { new Guid("a61ff1bb-8176-4724-a61a-c0a219de6aa1"), "#A52A2A", "Nâu" },
+                    { new Guid("b3e16dd0-2c84-45b5-b28c-25d80f64e6d0"), "#000000", "Đen" },
+                    { new Guid("b8907027-eb38-49f2-8cc3-ed0f44b35b99"), "#C0C0C0", "Bạc" },
+                    { new Guid("bf704dcb-4bb6-4448-8958-90e8bbcc009c"), "#FFFFFF", "Trắng" },
+                    { new Guid("cd763ff4-4723-40d8-9fed-402b0de403f8"), "#800080", "Tím" },
+                    { new Guid("d8f15d3e-bda9-4424-93a4-729f3363d02a"), "#C0C0C0", "Xám tro" },
+                    { new Guid("e4e9bd0e-3acc-4afa-b57d-9832edbcacee"), "#FFA500", "Cam" }
                 });
 
             migrationBuilder.InsertData(
@@ -648,8 +651,8 @@ namespace ShoeApp.Migrations
                 values: new object[,]
                 {
                     { new Guid("2fa0118d-b530-421f-878e-ce4d54bfc6ab"), null, "Bạc", 1000000, 0 },
-                    { new Guid("79a73ffc-889c-4e2c-bace-e2420cec43d1"), null, "Vàng", 3000000, 1000001 },
-                    { new Guid("ab9f7bd6-ccc3-4ed9-b3a0-ee30d225af7a"), null, "Kim Cương", 10000000, 3000001 }
+                    { new Guid("515cf98a-d64b-42c4-9aca-ff85a1292a0e"), null, "Kim Cương", 10000000, 3000001 },
+                    { new Guid("ea375335-d0e4-41fc-8c42-74ce57d0ca8f"), null, "Vàng", 3000000, 1000001 }
                 });
 
             migrationBuilder.InsertData(
@@ -658,32 +661,32 @@ namespace ShoeApp.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2FA6148D-B530-421F-878E-CE1D54BFC6AB", "8933ad84-3605-447c-b79c-cd21764b9690", "Admin", "ADMIN" },
-                    { "2FA6148D-B530-421F-878E-CE4D54BFC6AB", "25a78b49-1671-4291-b6bc-3bd7e0f3c873", "Guest", "GUEST" },
-                    { "3bd5519e-5a0b-4e20-af54-bd795c74f3c7", "5755b571-5269-46dd-8a8b-02523e53c105", "User", "USER" }
+                    { "29b7142b-8d9a-49f8-98b1-43678b2ba53f", "aaedc47b-96ed-440a-8b43-0453c9714043", "User", "USER" },
+                    { "2FA6148D-B530-421F-878E-CE1D54BFC6AB", "499aeed1-303a-4ccb-9679-a8c84d18506a", "Admin", "ADMIN" },
+                    { "2FA6148D-B530-421F-878E-CE4D54BFC6AB", "34f3f70a-2575-4114-86a1-782d3475ea85", "Guest", "GUEST" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Size",
                 columns: new[] { "Id", "SizeName" },
-                values: new object[] { new Guid("05fb222c-8852-4079-ae64-5bfa88f4be59"), "Size 5" });
+                values: new object[] { new Guid("0034009c-7a64-42fe-929a-6e44c9f6d6a6"), "Size 5" });
 
             migrationBuilder.InsertData(
                 table: "Size",
                 columns: new[] { "Id", "SizeName" },
                 values: new object[,]
                 {
-                    { new Guid("30c5b71a-bf4e-4413-9b1f-9ee75c152213"), "Size 3" },
-                    { new Guid("352d35d1-f72e-46ad-bda4-28621dfad9e4"), "Size 1" },
-                    { new Guid("3a2e2229-379e-41e0-b46e-7c9f0739ca8e"), "Size 2" },
-                    { new Guid("99407c55-9b46-4c88-aede-39308debe014"), "Size 4" }
+                    { new Guid("126064e8-a8f8-42fe-a8cc-58ddf1c0cb14"), "Size 1" },
+                    { new Guid("7f2e5cfe-241c-4a62-a5d1-b67c76c66624"), "Size 2" },
+                    { new Guid("b6e97070-f82b-4855-90bc-71d99ee253b9"), "Size 3" },
+                    { new Guid("ec04dd6c-a70c-446f-914c-3c65e2c79f08"), "Size 4" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "security",
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Points", "ProfilePicture", "RankId", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2FA6148D-B530-421F-878E-CE4D54BFC6AB", 0, "0ff364a3-c12e-4c8a-988b-33289907dcde", null, null, false, null, null, true, null, null, "GUEST", null, null, false, 0, null, new Guid("2fa0118d-b530-421f-878e-ce4d54bfc6ab"), "c540e8d1-3718-48ff-8b83-f310bf95465d", false, "Guest" });
+                values: new object[] { "2FA6148D-B530-421F-878E-CE4D54BFC6AB", 0, "559a6330-4d90-4485-8a4d-323ea5c78db2", null, null, false, null, null, true, null, null, "GUEST", null, null, false, 0, null, new Guid("2fa0118d-b530-421f-878e-ce4d54bfc6ab"), "0f068128-927b-45a0-a5dd-7c1563718f74", false, "Guest" });
 
             migrationBuilder.InsertData(
                 schema: "security",

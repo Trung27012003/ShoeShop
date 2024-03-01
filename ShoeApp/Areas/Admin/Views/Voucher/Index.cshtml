@@ -1,0 +1,138 @@
+﻿@model IEnumerable<ShoeApp.Models.Voucher>
+@{
+
+    ViewData["Page"] = "Mã giảm giá";
+    ViewData["Title"] = "Danh sách Mã giảm giá";
+}
+<div>
+    <div class="card-header pb-0">
+        <div class="d-lg-flex">
+            <div>
+                <h5 class="mb-0">@ViewData["Title"] </h5>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+                <div class="ms-auto my-auto">
+                    <a asp-action="Create" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; Thêm mới</a>
+                    <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="table-responsive">
+        <table class="table table-flush" id="datatable-search">
+            <thead class="thead-light">
+                <tr>
+                    <th>
+                        Mã
+                    </th>
+                    <th>
+                        Tiêu đề
+                    </th>
+                    <th>
+                        Loại ( VND / % )
+                    </th>
+                    <th>
+                        Số lượng
+                    </th>
+                    <th>
+                        Giá trị
+                    </th>
+
+                    <th>
+                        Ngày tạo
+                    </th>
+                    
+                    <th>
+                        Áp dụng đến
+                    </th>
+
+                    <th>
+                        Trạng thái
+                    </th>
+
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.VoucherCode
+                        </td>
+
+                        <td>
+                            @item.Title
+                        </td>
+                        <td>
+                            @if (item.Discount_Type==0)
+                            {
+                                <span>VND</span>
+                            }
+                            else
+                            {
+                                <span>%</span>
+                            }
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Value
+                        </td>
+                        <td>
+                            @item.Create_Date?.ToString("dd/MM/yyyy")
+                        </td>
+                        <td>
+                            @item.Start_Date?.ToString("dd/MM/yyyy HH:mm") - @item.End_Date?.ToString("dd/MM/yyyy HH:mm")
+                        </td>
+
+                        <td>
+                            @if (item?.Status==true)
+                            {
+                                <span class="badge bg-gradient-success">Hoạt động</span>
+
+                            }
+                            else
+                            {
+                                <span class="badge bg-gradient-success">Ngừng hoạt động</span>
+
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="EditPD" asp-route-productPD="@item.Id">
+                                <i class="fas fa-eye text-secondary">Sửa</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<partial name="_PagingAdmin" />
+
+<script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: true
+    });
+    document.querySelectorAll(".export").forEach(function (el) {
+        el.addEventListener("click", function (e) {
+            var type = el.dataset.type;
+
+            var data = {
+                type: type,
+                filename: "soft-ui-" + type,
+            };
+
+            if (type === "csv") {
+                data.columnDelimiter = "|";
+            }
+
+            dataTableSearch.export(data);
+        });
+    });
+</script>
