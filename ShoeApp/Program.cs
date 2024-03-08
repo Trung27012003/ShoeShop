@@ -125,6 +125,7 @@ app.UseAuthorization();
 
 app.UseMiddleware<CheckAccountStatusMiddleware>();
 
+// add endpoins
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(

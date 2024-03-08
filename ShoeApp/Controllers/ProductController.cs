@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShoeApp.IServices;
 
 namespace ShoeApp.Controllers
 {
     public class ProductController : Controller
     {
-        public IActionResult Index()
+        private IProductService _productService;
+
+        public ProductController(IProductService productService)
         {
-            return View();
+            _productService = productService;
+        }
+        public async Task<IActionResult> IndexAsync()
+        {
+            var lstProducts = await _productService.Gets();
+            return View(lstProducts);
         }
     }
 }

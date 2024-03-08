@@ -1,0 +1,157 @@
+﻿@model IEnumerable<ShoeApp.Models.Post>
+@{
+    ViewData["Title"] = "Blog";
+    int stt = 1;
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!-- Start breadcumb Area -->
+<section class="breadcrumb-login">
+    <div class="container">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<!-- End breadcumb Area -->
+<!--================Blog Categorie Area =================-->
+<section class="blog_categorie_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4" data-aos="fade-up">
+                <div class="single-deal">
+                    <div class="overlay"></div>
+                    <img class="img-fluid w-100" src="~/fileUser/images/blog/blog7.jpg" alt="">
+                    <a href="img/blog/blog7.jpg" class="img-pop-up" target="_blank">
+                        <div class="deal-details">
+                            <h6 class="deal-title">Puma</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4" data-aos="fade-up">
+                <div class="single-deal">
+                    <div class="overlay"></div>
+                    <img class="img-fluid w-100" src="~/fileUser/images/blog/blog8.jpg" alt="">
+                    <a href="img/blog/blog8.jpg" class="img-pop-up" target="_blank">
+                        <div class="deal-details">
+                            <h6 class="deal-title">Nike</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4" data-aos="fade-up">
+                <div class="single-deal">
+                    <div class="overlay"></div>
+                    <img class="img-fluid w-100" src="~/fileUser/images/blog/blog9.jpg" alt="">
+                    <a href="img/blog/blog9.jpg" class="img-pop-up" target="_blank">
+                        <div class="deal-details">
+                            <h6 class="deal-title">Adidas</h6>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Categorie Area =================-->
+<!--================Blog Area =================-->
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog_left_sidebar">
+                    @foreach (var item in Model)
+                    {
+                        if (stt%2!=0)
+                        {
+                            <!-- article img left -->
+                            <article class="row blog_item" data-aos="fade-up">
+                                <div class="col-md-12">
+                                    <div class="blog_post">
+                                        <div class="col-lg-6 blog_post-img">
+                                            <img src="@item.TittleImage" alt="">
+                                        </div>
+                                        <div class="col-lg-6 blog_details">
+                                            <a href="single-blog.html">
+                                                <h2>
+                                                   @item.Tittle
+                                                </h2>
+                                            </a>
+                                            <p>
+                                                Nike Air Jordan 1 được ra mắt năm 1985 là đôi giày ra đời sau Nike Air Jordan
+                                                đầu tiên – Nike Air Ship được sản xuất cho Michael Jordan do Peter C. Moore
+                                                thiết kế. Những phối màu đầu tiên của Giày Nike Air Jordan 1 là " Chicago "
+                                                và " Black Toe "
+                                            </p>
+                                            <a href="single-blog.html" class="white_bg_btn">View More</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                        else
+                        {
+                            <article class="row blog_item" data-aos="fade-up">
+                                <div class="col-md-12">
+                                    <div class="blog_post">
+                                        <div class="col-lg-6 blog_details">
+                                            <a href="single-blog.html">
+                                                <h2>
+                                                    @item.Tittle
+                                                </h2>
+                                            </a>
+                                            <p>
+                                                Nike Air Max 270 sẽ ra mắt với các tín đồ Air Max Việt Nam và bắt đầu bán với
+                                                số lượng giới hạn gồm 4 phối màu tại các cửa hàng bán lẻ của Nike Việt Nam
+                                                vào đầu tháng Tư năm 2018 này.
+                                            </p>
+                                            <a href="single-blog.html" class="white_bg_btn">View More</a>
+                                        </div>
+                                        <div class="col-lg-6 blog_post-img">
+                                            <img src="@item.TittleImage" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    }
+                    <nav class="blog-pagination justify-content-center d-flex">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a href="#" class="page-link page-link-arrow" aria-label="Previous">
+                                    <span aria-hidden="true">
+                                        <span class="lnr lnr-chevron-left"></span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="page-item active"><a href="#" class="page-link">01</a></li>
+                            <li class="page-item"><a href="#" class="page-link">02</a></li>
+                            <li class="page-item"><a href="#" class="page-link">03</a></li>
+                            <li class="page-item"><a href="#" class="page-link">04</a></li>
+                            <li class="page-item"><a href="#" class="page-link">09</a></li>
+                            <li class="page-item">
+                                <a href="#" class="page-link page-link-arrow" aria-label="Next">
+                                    <span aria-hidden="true">
+                                        <span class="lnr lnr-chevron-right"></span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->

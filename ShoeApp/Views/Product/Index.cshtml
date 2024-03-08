@@ -1,257 +1,393 @@
-﻿<!-- ========================= SECTION CONTENT ========================= -->
-<section class="section-content padding-y">
+﻿@model IEnumerable<ShoeApp.Models.Product>
+<style>
+    .custom-sidenav {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .has-sub {
+        margin-bottom: 10px;
+    }
+
+        .has-sub > a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #ddd; /* Thêm đường kẻ ngăn cách giữa các mục */
+        }
+
+        .has-sub ul {
+            display: none;
+            list-style: none;
+            padding: 0;
+        }
+
+            .has-sub ul li {
+                margin: 0;
+            }
+
+                .has-sub ul li a {
+                    display: block;
+                    padding: 10px;
+                    text-decoration: none;
+                    color: #333;
+                }
+
+    .checkbox-list {
+        margin-left: 15px; /* Lùi sang phải 1 tí */
+    }
+
+    .top-filter-head {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .filter-content {
+        margin-top: 10px;
+    }
+
+    .form-row {
+        margin-bottom: 10px;
+    }
+
+    .search-btn-product {
+        margin-top: 15px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .search-btn-product i {
+            margin-right: 5px;
+        }
+
+</style>
+@*Lưu trạng thái khi lọc*@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var sortOrder = document.getElementById('sortOrder');
+        var savedValue = sessionStorage.getItem('selectedValue');
+
+        if (savedValue) {
+            sortOrder.value = savedValue;
+        }
+
+        sortOrder.addEventListener('change', function () {
+            sessionStorage.setItem('selectedValue', this.value);
+            this.form.submit();
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var toggleButtons = document.querySelectorAll('.has-sub > a');
+        toggleButtons.forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                var submenu = this.nextElementSibling;
+                if (submenu.style.display === 'block') {
+                    submenu.style.display = 'none';
+                } else {
+                    submenu.style.display = 'block';
+                }
+            });
+        });
+
+        var searchButton = document.querySelector('.search-btn-product');
+        searchButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            // Thực hiện tìm kiếm hoặc xử lý dữ liệu lọc ở đây
+        });
+    });
+</script>
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
     <div class="container">
-
-
-        <!-- ============================  FILTER TOP  ================================= -->
-        <div class="card mb-3">
-            <div class="card-body">
-                <ol class="breadcrumb float-left">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Category name</a></li>
-                    <li class="breadcrumb-item active">Item details</li>
-                </ol>
-            </div> <!-- card-body .// -->
-        </div> <!-- card.// -->
-        <!-- ============================ FILTER TOP END.// ================================= -->
-
-
-        <div class="row">
-            <aside class="col-md-2">
-
-                <article class="filter-group">
-                    <h6 class="title">
-                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_1">	 Product type </a>
-                    </h6>
-                    <div class="filter-content collapse show" id="collapse_1">
-                        <div class="inner">
-                            <ul class="list-menu">
-                                <li><a href="#">Shorts  </a></li>
-                                <li><a href="#">Trousers </a></li>
-                                <li><a href="#">Sweaters  </a></li>
-                                <li><a href="#">Clothes  </a></li>
-                                <li><a href="#">Home items </a></li>
-                                <li><a href="#">Jackats</a></li>
-                                <li><a href="#">Somethings </a></li>
-                            </ul>
-                        </div> <!-- inner.// -->
-                    </div>
-                </article> <!-- filter-group  .// -->
-                <article class="filter-group">
-                    <h6 class="title">
-                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_2"> Brands </a>
-                    </h6>
-                    <div class="filter-content collapse show" id="collapse_2">
-                        <div class="inner">
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Adidas
-                                    <b class="badge badge-pill badge-light float-right">120</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Nike
-                                    <b class="badge badge-pill badge-light float-right">15</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    The Noth Face
-                                    <b class="badge badge-pill badge-light float-right">35</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" checked="" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    The cat
-                                    <b class="badge badge-pill badge-light float-right">89</b>
-                                </div>
-                            </label>
-                            <label class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input">
-                                <div class="custom-control-label">
-                                    Honda
-                                    <b class="badge badge-pill badge-light float-right">30</b>
-                                </div>
-                            </label>
-                        </div> <!-- inner.// -->
-                    </div>
-                </article> <!-- filter-group .// -->
-                <article class="filter-group">
-                    <h6 class="title">
-                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_3"> Price range </a>
-                    </h6>
-                    <div class="filter-content collapse show" id="collapse_3">
-                        <div class="inner">
-                            <input type="range" class="custom-range" min="0" max="100" name="">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Min</label>
-                                    <input class="form-control" placeholder="$0" type="number">
-                                </div>
-                                <div class="form-group text-right col-md-6">
-                                    <label>Max</label>
-                                    <input class="form-control" placeholder="$1,0000" type="number">
-                                </div>
-                            </div> <!-- form-row.// -->
-                            <button class="btn btn-block btn-primary">Apply</button>
-                        </div> <!-- inner.// -->
-                    </div>
-                </article> <!-- filter-group .// -->
-                <article class="filter-group">
-                    <h6 class="title">
-                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_4"> Sizes </a>
-                    </h6>
-                    <div class="filter-content collapse show" id="collapse_4">
-                        <div class="inner">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> XS </span>
-                            </label>
-
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> SM </span>
-                            </label>
-
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> LG </span>
-                            </label>
-
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> XXL </span>
-                            </label>
-                        </div> <!-- inner.// -->
-                    </div>
-                </article> <!-- filter-group .// -->
-                <article class="filter-group">
-                    <h6 class="title">
-                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_5"> Condition </a>
-                    </h6>
-                    <div class="filter-content collapse show" id="collapse_5">
-                        <div class="inner">
-                            <label class="custom-control custom-radio">
-                                <input type="radio" name="myfilter_radio" checked="" class="custom-control-input">
-                                <div class="custom-control-label">Any condition</div>
-                            </label>
-
-                            <label class="custom-control custom-radio">
-                                <input type="radio" name="myfilter_radio" class="custom-control-input">
-                                <div class="custom-control-label">Brand new </div>
-                            </label>
-
-                            <label class="custom-control custom-radio">
-                                <input type="radio" name="myfilter_radio" class="custom-control-input">
-                                <div class="custom-control-label">Used items</div>
-                            </label>
-
-                            <label class="custom-control custom-radio">
-                                <input type="radio" name="myfilter_radio" class="custom-control-input">
-                                <div class="custom-control-label">Very old</div>
-                            </label>
-                        </div> <!-- inner.// -->
-                    </div>
-                </article> <!-- filter-group .// -->
-
-            </aside> <!-- col.// -->
-            <main class="col-md-10">
-
-
-                <header class="mb-3">
-                    <div class="form-inline">
-                        <strong class="mr-md-auto">32 Items found </strong>
-                        <select class="mr-2 form-control">
-                            <option>Latest items</option>
-                            <option>Trending</option>
-                            <option>Most Popular</option>
-                            <option>Cheapest</option>
-                        </select>
-                        <div class="btn-group">
-                            <a href="page-listing-grid.html" class="btn btn-light" data-toggle="tooltip" title="List view">
-                                <i class="fa fa-bars"></i>
-                            </a>
-                            <a href="page-listing-large.html" class="btn btn-light active" data-toggle="tooltip" title="Grid view">
-                                <i class="fa fa-th"></i>
-                            </a>
-                        </div>
-                    </div>
-                </header><!-- sect-heading -->
-
-                <article class="card card-product-grid">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <figure class="card card-product-grid">
-                                <div class="img-wrap">
-                                    <span class="badge badge-danger"> NEW </span>
-                                    <img src="images/items/1.jpg">
-                                </div> <!-- img-wrap.// -->
-                                <figcaption class="info-wrap">
-                                    <a href="#" class="title mb-2">Hot sale unisex New Design Shirt for sport polo shirts latest design</a>
-                                    <div class="price-wrap">
-                                        <span class="price">$32.00-$40.00</span>
-                                        <small class="text-muted">/per item</small>
-                                    </div> <!-- price-wrap.// -->
-
-                                    <p class="mb-2"> 2 Pieces  <small class="text-muted">(Min Order)</small></p>
-
-                                    <p class="text-muted ">Guangzhou Yichuang Electronic Co</p>
-
-                                    <hr>
-
-                                    <p class="mb-3">
-                                        <span class="tag"> <i class="fa fa-check"></i> Verified</span>
-                                        <span class="tag"> 2 Years </span>
-                                        <span class="tag"> 23 reviews </span>
-                                        <span class="tag"> Japan </span>
-                                    </p>
-
-                                    <label class="custom-control mb-3 custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input">
-                                        <div class="custom-control-label">
-                                            Add to compare
-                                        </div>
-                                    </label>
-
-                                    <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i> Contact supplier </a>
-
-                                </figcaption>
-                            </figure>
-                        </div> <!-- col.// -->
-
-                    </div> <!-- row.// -->
-                </article> <!-- card-product .// -->
-
-
-                <nav class="mb-4" aria-label="Page navigation sample">
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                    </ul>
-                </nav>
-
-
-                <div class="box text-center">
-                    <p>Did you find what you were looking for？</p>
-                    <a href="" class="btn btn-light">Yes</a>
-                    <a href="" class="btn btn-light">No</a>
-                </div>
-
-
-            </main> <!-- col.// -->
-
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
         </div>
-
-    </div> <!-- container .//  -->
+    </div>
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
+
+<!-- Start breadcumb Area -->
+<section class="breadcrumb-ctn mt-3">
+    <div class="container">
+        <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<!-- End breadcumb Area -->
+<!-- End Banner Area -->
+<form method="get" action="@Url.Action("ListProduct")" id="filterForm">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-5">
+                <div class="sidebar-filter mt-50">
+                    <div class="top-filter-head">Danh mục</div>
+                    <div class="common-filter">
+                        <!-- sidenav-section -->
+                        <div id="cssmenu" class="custom-sidenav">
+                            <ul>
+                                <li class="has-sub">
+                                    <a href="#">Hãng sản xuất</a>
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XS
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> SM
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> LG
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XXL
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="has-sub">
+                                    <a href="#">Loại Sản phẩm</a>
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XS
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> SM
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> LG
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XXL
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="has-sub">
+                                    <a href="#">Màu sắc</a>
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XS
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> SM
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> LG
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XXL
+                                        </label>
+                                    </div>
+                                </li>
+                                <li class="has-sub">
+                                    <a href="#">Kích cỡ</a>
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XS
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> SM
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> LG
+                                        </label>
+                                        <label class="btn btn-light">
+                                            <input type="checkbox"> XXL
+                                        </label>
+                                    </div>
+                                </li>
+
+                                <li class="has-sub">
+                                    <a href="#">Chất liệu</a>
+                                    <ul>
+                                        @*@foreach (var item in productMaterial)
+                                        {
+                                            <li class="even">
+                                                <label>
+                                                    <input type="checkbox" name="SelectedMaterial" value="@item.Value" @(selectedMaterialIds != null && selectedMaterialIds.Select(x => x.ToString()).Contains(item.Value) ? "checked='checked'" : "")>
+                                                    <span class="checkbox-list">@item.Text</span>
+                                                </label>
+                                            </li>
+                                        }*@
+                                    </ul>
+                                </li>
+                                <li class="has-sub">
+                                    <a href="#">Giá Bán</a>
+                                    <ul>
+                                        <li class="even">
+                                            <div class="filter-content collapse show" id="collapse_3">
+                                                <div class="inner">
+                                                    <div class="form-row">
+                                                        <div class="form-group col-md-6">
+                                                            <label>Min</label>
+                                                            <input class="form-control" placeholder="0đ" name="minPrice" type="number" min="0" value="">
+                                                        </div>
+                                                        <div class="form-group text-right col-md-6">
+                                                            <label>Max</label>
+                                                            <input class="form-control" placeholder="10 000đ" name="maxPrice" type="number" min="0" value="">
+                                                        </div>
+                                                    </div> <!-- form-row.// -->
+                                                </div> <!-- inner.// -->
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <button class="search-btn-product primary-btn d-flex"><i class="bx bx-search-alt"></i></button>
+                        </div>
+                        <!-- /.sidenav-section -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-9 col-lg-8 col-md-7">
+                <!-- Start Filter Bar -->
+                <div class="filter-bar d-flex flex-wrap align-items-center">
+                    <div class="sorting custom-sort-product">
+                        <form asp-controller="Product" asp-action="Filter" method="get">
+                            <div class="select-option form-group">
+                                <select id="sortOrder" name="sortOrder" class="form-control" placeholder="Sắp xếp theo">
+                                    <option value="" default="">Sắp xếp theo</option>
+                                    <option value="low-price">Giá Thấp</option>
+                                    <option value="high-price">Giá Cao</option>
+                                    <option value="a">A-Z</option>
+                                    <option value="z">Z-A</option>
+                                </select>
+                                <input type="submit" style="display: none;" />
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                <!-- End Filter Bar -->
+                <!-- Start Best Seller -->
+                <section class="lattest-product-area category-list">
+                    <div class="row" data-aos="fade-up">
+                        <!-- single product -->
+                        @foreach (var item in Model)
+                        {
+                                               ////////////
+                                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                                    <div class="single-product">
+                                        <a href="/Product/ProductDetail/@item.Id">
+                                            <div class="img-prd-animation">
+                                                <div class="img-fluid">
+                                                    <img class="" src="@item.ProductImages.First().ImageUrl" />
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="product-details mt-3">
+                                            <h6 class="custom-title-product">
+                                                <a class="text-decoration-none text-link-hover" 
+                                                   href="/Product/ProductDetail/@item.Id">
+                                                    @item.ProductName
+                                                </a>
+                                            </h6>
+                                            <div class="price d-flex">
+                                            <h6 class="d-flex">@item.ProductDetails[0].PriceSale?.ToString("n0") đ<span class="text-lowercase"></span></h6>
+
+                                               @* @if (item.MinPrice == item.MaxPrice )
+                                                {
+
+                                                    <h6 class="d-flex">@item.MinPrice?.ToString("n0") đ<span class="text-lowercase"></span></h6>
+                                                }
+                                                else
+                                                {
+
+                                                    <h6 class="d-flex">@item.MinPrice?.ToString("n0") đ  - @item.MaxPrice?.ToString("n0") đ <span class="text-lowercase"></span></h6>
+                                                }*@
+                                            </div>
+                                            <div class="prd-bottom">
+                                                <a class="addProduct social-info" href="/Product/ProductDetail/@item.Id">
+                                                    <span class='bx bx-basket'></span>
+                                                    <p class="hover-text">Chi tiết</p>
+                                                </a>
+                                                <a href="/Product/ProductDetail/@item.Id" class="social-info">
+                                                    <span class='bx bx-move'></span>
+                                                    <p class="hover-text">Xem Thêm</p>
+                                                </a>
+                                                <a onclick="addToWishList('@item.Id')" class="social-info">
+                                                    <span class='bx bx-purchase-tag-alt bx-rotate-180'></span>
+                                                    <p class="hover-text">Yêu thích</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                          
+                        }
+                        <!-- single product -->
+                    </div>
+                </section>
+                <!-- End Best Seller -->
+            </div>
+        </div>
+    </div>
+</form>
+@*<div class="col-lg-12 mt-3 p-3 pagin-history">
+    <div class="shadow-sm">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center align-items-center">
+                <!-- Đây là phần mới -->
+                <div class="pagin-left font-weight-lighter">
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                </div>
+                <div class="pagin-right ml-auto">
+                    @Html.PagedListPager(Model, page => Url.Action("ListProduct", new { page,SearchString = ViewBag.SearchString,SelectedCategory = ViewBag.SelectedCategory,SelectedBrand = ViewBag.SelectedBrand,SelectedMaterial =ViewBag.SelectedMaterial,minPrice=ViewBag.minPrice,maxPrice=ViewBag.maxPrice,sortOrder=ViewBag.sortOrder}))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+<script>
+    function addToWishList(productId) {
+        $.ajax({
+            type: "POST",
+            url: "/Product/WishList",
+            data: { ProductId: productId },
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị SweetAlert khi thêm thành công
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Sản phẩm đã được thêm vào danh sách yêu thích.',
+                        showConfirmButton: true, // Hiển thị nút xác nhận
+                        confirmButtonText: 'Xem danh sách yêu thích', // Text cho nút xác nhận
+                        timer: 3000
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Nếu người dùng ấn xác nhận, chuyển hướng đến trang danh sách yêu thích
+                            window.location.href = "/Product/ShowWishList";
+                        }
+                    });
+                } else {
+                    // Hiển thị SweetAlert khi có lỗi
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: response.errorMessage || 'Có lỗi xảy ra khi thêm sản phẩm vào danh sách yêu thích.'
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                // Xử lý khi có lỗi
+                console.log(error);
+                // Hiển thị thông báo lỗi cho người dùng
+            }
+        });
+    }
+</script>
